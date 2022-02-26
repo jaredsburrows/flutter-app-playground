@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gradle_app_playground/ui/widget/drawer.dart';
 
 class HomePage extends StatefulWidget {
+  static const String title = 'Home';
   static const String route = '/home-page';
 
   const HomePage({Key? key}) : super(key: key);
