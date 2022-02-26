@@ -3,7 +3,8 @@ import 'package:flutter_gradle_app_playground/ui/widget/drawer.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class PackageInfoPage extends StatefulWidget {
-  static const String routeName = '/package_info_page';
+  static const String title = 'Package Info';
+  static const String route = '/package-info-page';
 
   const PackageInfoPage({Key? key}) : super(key: key);
 
@@ -26,20 +27,6 @@ class _PackageInfoPageState extends State<PackageInfoPage> {
     _initPackageInfo();
   }
 
-  Future<void> _initPackageInfo() async {
-    final info = await PackageInfo.fromPlatform();
-    setState(() {
-      _packageInfo = info;
-    });
-  }
-
-  Widget _infoTile(String title, String subtitle) {
-    return ListTile(
-      title: Text(title),
-      subtitle: Text(subtitle.isEmpty ? 'Not set' : subtitle),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +43,20 @@ class _PackageInfoPageState extends State<PackageInfoPage> {
           _infoTile('Build signature', _packageInfo.buildSignature),
         ],
       ),
+    );
+  }
+
+  Future<void> _initPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
+    setState(() {
+      _packageInfo = info;
+    });
+  }
+
+  Widget _infoTile(String title, String subtitle) {
+    return ListTile(
+      title: Text(title),
+      subtitle: Text(subtitle.isEmpty ? 'Not set' : subtitle),
     );
   }
 }
