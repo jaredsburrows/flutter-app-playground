@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gradle_app_playground/build_config.dart';
+import 'package:flutter_gradle_app_playground/ui/battery_info/batter_info_page.dart';
 import 'package:flutter_gradle_app_playground/ui/home/home_page.dart';
 import 'package:flutter_gradle_app_playground/ui/package_info/package_info_page.dart';
 
@@ -18,10 +19,12 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       home: const HomePage(),
-      initialRoute: HomePage.routeName,
+      initialRoute: HomePage.route,
       routes: <String, WidgetBuilder>{
-        HomePage.routeName: (BuildContext context) => const HomePage(),
-        PackageInfoPage.routeName: (BuildContext context) =>
+        BatteryInfoPage.route: (BuildContext context) =>
+            const BatteryInfoPage(),
+        HomePage.route: (BuildContext context) => const HomePage(),
+        PackageInfoPage.route: (BuildContext context) =>
             const PackageInfoPage(),
       },
     );

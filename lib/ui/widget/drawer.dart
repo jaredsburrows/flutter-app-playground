@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gradle_app_playground/ui/battery_info/batter_info_page.dart';
+import 'package:flutter_gradle_app_playground/ui/home/home_page.dart';
 import 'package:flutter_gradle_app_playground/ui/package_info/package_info_page.dart';
 
 int selectedIndex = 0;
@@ -27,25 +29,43 @@ class _AppDrawerState extends State<AppDrawer> {
                   selectedIndex = 0;
                 });
 
-                // Navigator.pushReplacementNamed(context, HomePage.routeName);
                 Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const HomePage(),
+                ));
               }),
           PageListTile(
               icon: Icons.info,
-              pageName: 'Package Info',
+              pageName: 'Battery Info',
               isSelected: selectedIndex == 1,
               onTap: () {
                 setState(() {
                   selectedIndex = 1;
                 });
 
-                Navigator.pushReplacementNamed(
-                    context, PackageInfoPage.routeName);
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const BatteryInfoPage(),
+                ));
+              }),
+          PageListTile(
+              icon: Icons.info,
+              pageName: 'Package Info',
+              isSelected: selectedIndex == 2,
+              onTap: () {
+                setState(() {
+                  selectedIndex = 2;
+                });
+
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const PackageInfoPage(),
+                ));
               }),
           const Divider(),
           const AboutListTile(
             child: Text('About'),
-            applicationName: 'Application Name',
+            applicationName: 'Flutter Playground',
             applicationVersion: 'v1.0.0',
             applicationIcon: Icon(Icons.adb),
             icon: Icon(Icons.info),
@@ -68,10 +88,8 @@ class _AppDrawerState extends State<AppDrawer> {
               bottom: 12.0,
               left: 16.0,
               child: Text("Flutter Step-by-Step",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w500))),
+                  style:
+                      TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500))),
         ]));
   }
 }
@@ -93,15 +111,8 @@ class PageListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       selected: isSelected,
-      title: Row(
-        children: <Widget>[
-          Icon(icon),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Text(pageName),
-          )
-        ],
-      ),
+      leading: Icon(icon),
+      title: Text(pageName),
       onTap: onTap,
     );
   }
