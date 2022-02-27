@@ -1,4 +1,4 @@
-package com.jaredsburrows.flutter.playground.flutter_gradle_app_playground
+package com.jaredsburrows.flutter.playground
 
 import io.flutter.embedding.android.FlutterActivity
 

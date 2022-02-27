@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gradle_app_playground/ui/battery_info/batter_info_page.dart';
 import 'package:flutter_gradle_app_playground/ui/home/home_page.dart';
 import 'package:flutter_gradle_app_playground/ui/package_info/package_info_page.dart';
+import 'package:flutter_gradle_app_playground/ui/qr_camera/qr_camera_page.dart';
+import 'package:flutter_gradle_app_playground/ui/qr_camera/qr_camera_page2.dart';
+import 'package:flutter_gradle_app_playground/ui/qr_generator/qr_generator.dart';
 
 int selectedIndex = 0;
+int index = 0;
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -22,11 +26,11 @@ class _AppDrawerState extends State<AppDrawer> {
           _createHeader(),
           PageListTile(
               icon: Icons.home,
-              pageName: 'Home',
-              isSelected: selectedIndex == 0,
+              pageName: HomePage.title,
+              isSelected: selectedIndex == index++,
               onTap: () {
                 setState(() {
-                  selectedIndex = 0;
+                  selectedIndex = index;
                 });
 
                 Navigator.of(context).pop();
@@ -36,11 +40,11 @@ class _AppDrawerState extends State<AppDrawer> {
               }),
           PageListTile(
               icon: Icons.info,
-              pageName: 'Battery Info',
-              isSelected: selectedIndex == 1,
+              pageName: BatteryInfoPage.title,
+              isSelected: selectedIndex == index++,
               onTap: () {
                 setState(() {
-                  selectedIndex = 1;
+                  selectedIndex = index;
                 });
 
                 Navigator.of(context).pop();
@@ -50,11 +54,11 @@ class _AppDrawerState extends State<AppDrawer> {
               }),
           PageListTile(
               icon: Icons.info,
-              pageName: 'Package Info',
-              isSelected: selectedIndex == 2,
+              pageName: PackageInfoPage.title,
+              isSelected: selectedIndex == index++,
               onTap: () {
                 setState(() {
-                  selectedIndex = 2;
+                  selectedIndex = index;
                 });
 
                 Navigator.of(context).pop();
@@ -62,6 +66,49 @@ class _AppDrawerState extends State<AppDrawer> {
                   builder: (BuildContext context) => const PackageInfoPage(),
                 ));
               }),
+          PageListTile(
+              icon: Icons.camera,
+              pageName: QrCameraPage.title,
+              isSelected: selectedIndex == index++,
+              onTap: () {
+                setState(() {
+                  selectedIndex = index;
+                });
+
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const QrCameraPage(),
+                ));
+              }),
+          PageListTile(
+              icon: Icons.camera,
+              pageName: QrCameraPage2.title,
+              isSelected: selectedIndex == index++,
+              onTap: () {
+                setState(() {
+                  selectedIndex = index;
+                });
+
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const QrCameraPage2(),
+                ));
+              }),
+          PageListTile(
+              icon: Icons.camera,
+              pageName: QrGeneratorPage.title,
+              isSelected: selectedIndex == index++,
+              onTap: () {
+                setState(() {
+                  selectedIndex = index;
+                });
+
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const QrGeneratorPage(),
+                ));
+              }),
+
           const Divider(),
           const AboutListTile(
             child: Text('About'),
@@ -81,7 +128,7 @@ class _AppDrawerState extends State<AppDrawer> {
         padding: EdgeInsets.zero,
         decoration: const BoxDecoration(
             image: DecorationImage(
-                fit: BoxFit.fill,
+                fit: BoxFit.fitWidth,
                 image: AssetImage('res/images/Icon-512.png'))),
         child: Stack(children: const <Widget>[
           Positioned(
