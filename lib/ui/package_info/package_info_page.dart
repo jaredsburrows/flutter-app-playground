@@ -3,7 +3,8 @@ import 'package:flutter_gradle_app_playground/ui/widget/drawer.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class PackageInfoPage extends StatefulWidget {
-  static const String title = 'Package Info';
+  static const String title = 'Package Info Page';
+  static const IconData icon = Icons.info;
   static const String route = '/package-info-page';
 
   const PackageInfoPage({Key? key}) : super(key: key);
@@ -31,7 +32,7 @@ class _PackageInfoPageState extends State<PackageInfoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Package Info Page"),
+        title: const Text(PackageInfoPage.title),
       ),
       drawer: const AppDrawer(),
       body: Column(

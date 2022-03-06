@@ -8,7 +8,8 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
 class QrGeneratorPage extends StatefulWidget {
-  static const String title = 'Qr Generator';
+  static const String title = 'Qr Generator Page';
+  static const IconData icon = Icons.share;
   static const String route = '/qr-generator-page';
 
   const QrGeneratorPage({Key? key}) : super(key: key);
@@ -25,27 +26,11 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> {
     _setBrightness(1.0);
   }
 
-  Future<void> _setBrightness(double brightness) async {
-    try {
-      await ScreenBrightness().setScreenBrightness(brightness);
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-  }
-
   @override
   void dispose() {
     super.dispose();
 
     _resetBrightness();
-  }
-
-  Future<void> _resetBrightness() async {
-    try {
-      await ScreenBrightness().resetScreenBrightness();
-    } catch (e) {
-      debugPrint(e.toString());
-    }
   }
 
   @override
@@ -57,8 +42,8 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> {
       systemNavigationBarIconBrightness: Brightness.dark,
     ));
 
-    String dateTime = DateFormat("yMMMMd", 'en_US').format(DateTime.now());
-    String message = "Today is $dateTime";
+    final dateTime = DateFormat('yMMMMd', 'en_US').format(DateTime.now());
+    final message = "Today is $dateTime";
 
     final qrFutureBuilder = FutureBuilder<ui.Image>(
       future: _loadOverlayImage(),
@@ -113,6 +98,22 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> {
         ),
       ),
     );
+  }
+
+  Future<void> _setBrightness(double brightness) async {
+    try {
+      await ScreenBrightness().setScreenBrightness(brightness);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  Future<void> _resetBrightness() async {
+    try {
+      await ScreenBrightness().resetScreenBrightness();
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   Future<ui.Image> _loadOverlayImage() async {

@@ -3,7 +3,8 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QrCameraPage2 extends StatefulWidget {
   static const String title = 'Qr Camera 2';
-  static const String route = '/qr-camera-camera-page-2';
+  static const IconData icon = Icons.camera;
+  static const String route = '/qr-camera-page-2';
 
   const QrCameraPage2({Key? key}) : super(key: key);
 

@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gradle_app_playground/ui/widget/drawer.dart';
 
 class BatteryInfoPage extends StatefulWidget {
-  static const String title = 'Battery Info';
+  static const String title = 'Battery Info Page';
+  static const IconData icon = Icons.battery_full_outlined;
   static const String route = '/battery-info-page';
 
   const BatteryInfoPage({Key? key}) : super(key: key);
@@ -46,9 +47,6 @@ class _BatteryInfoPageState extends State<BatteryInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Batter Info'),
-      ),
       drawer: const AppDrawer(),
       body: Column(
         children: <Widget>[
