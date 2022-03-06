@@ -53,6 +53,7 @@ jobs:
         with:
           sdk: 2.16.1
       - run: |
+          dart --disable-analytics
           dart --version
 
       - name: Configure Flutter
@@ -61,21 +62,25 @@ jobs:
           flutter-version: 2.10.2
           channel: stable
       - run: |
-          flutter --version
           flutter config --no-analytics
-          flutter doctor
+          flutter doctor -v
+          flutter --version
 
       - name: Build Android
-        run: flutter build apk --release --dart-define RELEASE=true --obfuscate --split-debug-info build/app/outputs/symbols-apk/ --target-platform android-arm64 --suppress-analytics
+        run: |
+          flutter build apk --release --dart-define RELEASE=true --obfuscate --split-debug-info build/app/outputs/symbols-apk/ --target-platform android-arm64
 
       - name: Build iOS
-        run: flutter build ios --release --dart-define RELEASE=true --obfuscate --split-debug-info build/ios/outputs/symbols --no-codesign --suppress-analytics
+        run: |
+          flutter build ios --release --dart-define RELEASE=true --obfuscate --split-debug-info build/ios/outputs/symbols --no-codesign
 
       - name: Build Website
-        run: flutter build web --release --dart-define RELEASE=true --base-href /flutter-gradle-app-playground/ --suppress-analytics
+        run: |
+          flutter build web --release --dart-define RELEASE=true --base-href /flutter-gradle-app-playground/
 
       - name: Run Analyzer
-        run: flutter analyze --suppress-analytics
+        run: |
+          flutter analyze
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2.3.1
@@ -124,7 +129,8 @@ jobs:
           channel: stable
 
       - name: Build Website
-        run: flutter build web --release --dart-define RELEASE=true --base-href /flutter-gradle-app-playground/ --suppress-analytics
+        run: |
+          flutter build web --release --dart-define RELEASE=true --base-href /flutter-gradle-app-playground/
 
       - name: Publish Website
         uses: peaceiris/actions-gh-pages@v3

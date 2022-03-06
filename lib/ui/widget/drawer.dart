@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gradle_app_playground/ui/battery_info/batter_info_page.dart';
+import 'package:flutter_gradle_app_playground/ui/camera/camera_page.dart';
+import 'package:flutter_gradle_app_playground/ui/chart/chart_page.dart';
 import 'package:flutter_gradle_app_playground/ui/home/home_page.dart';
 import 'package:flutter_gradle_app_playground/ui/package_info/package_info_page.dart';
+import 'package:flutter_gradle_app_playground/ui/profile/profile_page.dart';
 import 'package:flutter_gradle_app_playground/ui/qr_camera/qr_camera_page.dart';
 import 'package:flutter_gradle_app_playground/ui/qr_camera/qr_camera_page2.dart';
 import 'package:flutter_gradle_app_playground/ui/qr_generator/qr_generator.dart';
@@ -25,8 +28,8 @@ class _AppDrawerState extends State<AppDrawer> {
         children: <Widget>[
           _createHeader(),
           PageListTile(
-              icon: Icons.home,
-              pageName: HomePage.title,
+              icon: HomePage.icon,
+              pageName: "${HomePage.title} (A/i/W)",
               isSelected: selectedIndex == index++,
               onTap: () {
                 setState(() {
@@ -35,12 +38,12 @@ class _AppDrawerState extends State<AppDrawer> {
 
                 Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => const HomePage(),
+                  builder: (BuildContext context) => HomePage(),
                 ));
               }),
           PageListTile(
-              icon: Icons.info,
-              pageName: BatteryInfoPage.title,
+              icon: BatteryInfoPage.icon,
+              pageName: "${BatteryInfoPage.title} (A/i/W)",
               isSelected: selectedIndex == index++,
               onTap: () {
                 setState(() {
@@ -53,8 +56,36 @@ class _AppDrawerState extends State<AppDrawer> {
                 ));
               }),
           PageListTile(
-              icon: Icons.info,
-              pageName: PackageInfoPage.title,
+              icon: CameraPage.icon,
+              pageName: "${CameraPage.title} (A/i/W)",
+              isSelected: selectedIndex == index++,
+              onTap: () {
+                setState(() {
+                  selectedIndex = index;
+                });
+
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const CameraPage(),
+                ));
+              }),
+          PageListTile(
+              icon: ChartPage.icon,
+              pageName: "${ChartPage.title} (A/i/W)",
+              isSelected: selectedIndex == index++,
+              onTap: () {
+                setState(() {
+                  selectedIndex = index;
+                });
+
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const ChartPage(),
+                ));
+              }),
+          PageListTile(
+              icon: PackageInfoPage.icon,
+              pageName: "${PackageInfoPage.title} (A/i/W)",
               isSelected: selectedIndex == index++,
               onTap: () {
                 setState(() {
@@ -67,8 +98,22 @@ class _AppDrawerState extends State<AppDrawer> {
                 ));
               }),
           PageListTile(
-              icon: Icons.camera,
-              pageName: QrCameraPage.title,
+              icon: ProfilePage.icon,
+              pageName: "${ProfilePage.title} (A/i/W)",
+              isSelected: selectedIndex == index++,
+              onTap: () {
+                setState(() {
+                  selectedIndex = index;
+                });
+
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => const ProfilePage(),
+                ));
+              }),
+          PageListTile(
+              icon: QrCameraPage.icon,
+              pageName: "${QrCameraPage.title} (A/i)",
               isSelected: selectedIndex == index++,
               onTap: () {
                 setState(() {
@@ -81,8 +126,8 @@ class _AppDrawerState extends State<AppDrawer> {
                 ));
               }),
           PageListTile(
-              icon: Icons.camera,
-              pageName: QrCameraPage2.title,
+              icon: QrCameraPage2.icon,
+              pageName: "${QrCameraPage2.title} (A/i)",
               isSelected: selectedIndex == index++,
               onTap: () {
                 setState(() {
@@ -95,8 +140,8 @@ class _AppDrawerState extends State<AppDrawer> {
                 ));
               }),
           PageListTile(
-              icon: Icons.camera,
-              pageName: QrGeneratorPage.title,
+              icon: QrGeneratorPage.icon,
+              pageName: "${QrGeneratorPage.title} (A/i/W)",
               isSelected: selectedIndex == index++,
               onTap: () {
                 setState(() {
@@ -108,7 +153,6 @@ class _AppDrawerState extends State<AppDrawer> {
                   builder: (BuildContext context) => const QrGeneratorPage(),
                 ));
               }),
-
           const Divider(),
           const AboutListTile(
             child: Text('About'),
@@ -134,7 +178,7 @@ class _AppDrawerState extends State<AppDrawer> {
           Positioned(
               bottom: 12.0,
               left: 16.0,
-              child: Text("Flutter Step-by-Step",
+              child: Text('Flutter Step-by-Step',
                   style:
                       TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500))),
         ]));

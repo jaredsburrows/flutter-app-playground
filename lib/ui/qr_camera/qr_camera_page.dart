@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QrCameraPage extends StatefulWidget {
-  static const String title = 'Qr Camera';
-  static const String route = '/qr-camera-camera-page';
+  static const String title = 'Qr Camera Page';
+  static const IconData icon = Icons.camera;
+  static const String route = '/qr-camera-page';
 
   const QrCameraPage({Key? key}) : super(key: key);
 
