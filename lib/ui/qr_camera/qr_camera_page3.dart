@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gradle_app_playground/ui/page_info.dart';
 import 'package:qr_code_dart_scan/qr_code_dart_scan.dart';
 
 // https://pub.dev/packages/qr_code_dart_scan
 // PLATFORM ANDROID IOS WEB
-class QrCameraPage3 extends StatefulWidget {
-  static const String title = 'Qr Camera Page 3';
-  static const IconData icon = Icons.camera;
-  static const String route = '/qr-camera-page-3';
-
+class QrCameraPage3 extends StatefulWidget implements PageInfo {
   const QrCameraPage3({Key? key}) : super(key: key);
+
+  @override
+  String title() => 'Qr Camera Page 3';
+
+  @override
+  IconData icon() => Icons.camera;
+
+  @override
+  String route() => '/qr-camera-page-3';
 
   @override
   State<QrCameraPage3> createState() => _QrCameraPage3State();

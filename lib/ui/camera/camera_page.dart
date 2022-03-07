@@ -5,18 +5,24 @@ import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gradle_app_playground/main.dart';
+import 'package:flutter_gradle_app_playground/ui/page_info.dart';
 import 'package:video_player/video_player.dart';
 
 // https://pub.dev/packages/video_player
 // PLATFORM ANDROID IOS WEB
 // https://pub.dev/packages/camera
 // PLATFORM ANDROID IOS WEB
-class CameraPage extends StatefulWidget {
-  static const String title = 'Camera Page';
-  static const IconData icon = Icons.camera;
-  static const String route = '/camera-page';
-
+class CameraPage extends StatefulWidget implements PageInfo {
   const CameraPage({Key? key}) : super(key: key);
+
+  @override
+  String title() => 'Camera Page';
+
+  @override
+  IconData icon() => Icons.camera;
+
+  @override
+  String route() => '/camera-page';
 
   @override
   _CameraPageState createState() {

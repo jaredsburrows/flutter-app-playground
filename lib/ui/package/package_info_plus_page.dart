@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gradle_app_playground/ui/page_info.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 // https://pub.dev/packages/package_info_plus
 // PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
-class PackageInfoPage extends StatefulWidget {
-  static const String title = 'Package Info Page';
-  static const IconData icon = Icons.info;
-  static const String route = '/package-info-page';
-
+class PackageInfoPage extends StatefulWidget implements PageInfo {
   const PackageInfoPage({Key? key}) : super(key: key);
+
+  @override
+  String title() => 'Package Info Page';
+
+  @override
+  IconData icon() => Icons.info;
+
+  @override
+  String route() => '/package-info-page';
 
   @override
   State<PackageInfoPage> createState() => _PackageInfoPageState();

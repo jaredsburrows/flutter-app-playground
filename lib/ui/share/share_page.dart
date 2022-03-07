@@ -1,17 +1,23 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gradle_app_playground/ui/page_info.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:share_plus/share_plus.dart';
 
 // https://pub.dev/packages/share_plus
 // PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
-class SharePage extends StatefulWidget {
-  static const String title = 'Share Page';
-  static const IconData icon = Icons.share;
-  static const String route = '/share-page';
-
+class SharePage extends StatefulWidget implements PageInfo {
   const SharePage({Key? key}) : super(key: key);
+
+  @override
+  String title() => 'Share Page';
+
+  @override
+  IconData icon() => Icons.share;
+
+  @override
+  String route() => '/share-page';
 
   @override
   _SharePageState createState() => _SharePageState();

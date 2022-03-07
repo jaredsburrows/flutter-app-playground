@@ -1,15 +1,22 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_gradle_app_playground/ui/page_info.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
 // https://pub.dev/packages/sensors_plus
 // PLATFORM ANDROID IOS WEB
-class SensorsPage extends StatefulWidget {
-  static const String title = 'Sensors Page';
-  static const IconData icon = Icons.sensors;
-  static const String route = '/senors-page';
-
+class SensorsPage extends StatefulWidget implements PageInfo {
   const SensorsPage({Key? key}) : super(key: key);
+
+  @override
+  String title() => 'Sensors Page';
+
+  @override
+  IconData icon() => Icons.sensors;
+
+  @override
+  String route() => '/senors-page';
 
   @override
   _SensorsPageState createState() => _SensorsPageState();
@@ -29,14 +36,14 @@ class _SensorsPageState extends State<SensorsPage> {
   @override
   Widget build(BuildContext context) {
     final accelerometer =
-    _accelerometerValues?.map((double v) => v.toStringAsFixed(1)).toList();
+        _accelerometerValues?.map((double v) => v.toStringAsFixed(1)).toList();
     final gyroscope =
-    _gyroscopeValues?.map((double v) => v.toStringAsFixed(1)).toList();
+        _gyroscopeValues?.map((double v) => v.toStringAsFixed(1)).toList();
     final userAccelerometer = _userAccelerometerValues
         ?.map((double v) => v.toStringAsFixed(1))
         .toList();
     final magnetometer =
-    _magnetometerValues?.map((double v) => v.toStringAsFixed(1)).toList();
+        _magnetometerValues?.map((double v) => v.toStringAsFixed(1)).toList();
 
     return Scaffold(
       body: Column(
@@ -112,7 +119,7 @@ class _SensorsPageState extends State<SensorsPage> {
     super.initState();
     _streamSubscriptions.add(
       accelerometerEvents.listen(
-            (AccelerometerEvent event) {
+        (AccelerometerEvent event) {
           setState(() {
             _accelerometerValues = <double>[event.x, event.y, event.z];
           });
@@ -121,7 +128,7 @@ class _SensorsPageState extends State<SensorsPage> {
     );
     _streamSubscriptions.add(
       gyroscopeEvents.listen(
-            (GyroscopeEvent event) {
+        (GyroscopeEvent event) {
           setState(() {
             _gyroscopeValues = <double>[event.x, event.y, event.z];
           });
@@ -130,7 +137,7 @@ class _SensorsPageState extends State<SensorsPage> {
     );
     _streamSubscriptions.add(
       userAccelerometerEvents.listen(
-            (UserAccelerometerEvent event) {
+        (UserAccelerometerEvent event) {
           setState(() {
             _userAccelerometerValues = <double>[event.x, event.y, event.z];
           });
@@ -139,7 +146,7 @@ class _SensorsPageState extends State<SensorsPage> {
     );
     _streamSubscriptions.add(
       magnetometerEvents.listen(
-            (MagnetometerEvent event) {
+        (MagnetometerEvent event) {
           setState(() {
             _magnetometerValues = <double>[event.x, event.y, event.z];
           });

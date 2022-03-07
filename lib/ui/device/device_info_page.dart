@@ -5,15 +5,21 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gradle_app_playground/ui/page_info.dart';
 
 // https://pub.dev/packages/device_info_plus
 // PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
-class DeviceInfoPage extends StatefulWidget {
-  static const String title = 'Device Info Page';
-  static const IconData icon = Icons.device_unknown;
-  static const String route = '/device-info-page';
-
+class DeviceInfoPage extends StatefulWidget implements PageInfo {
   const DeviceInfoPage({Key? key}) : super(key: key);
+
+  @override
+  String title() =>  'Device Info Page';
+
+  @override
+  IconData icon() => Icons.device_unknown;
+
+  @override
+  String route() => '/device-info-page';
 
   @override
   _DeviceInfoPageState createState() => _DeviceInfoPageState();

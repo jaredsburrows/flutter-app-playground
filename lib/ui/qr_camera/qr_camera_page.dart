@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gradle_app_playground/ui/page_info.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 // https://pub.dev/packages/mobile_scanner
 // PLATFORM ANDROID IOS MACOS
-class QrCameraPage extends StatefulWidget {
-  static const String title = 'Qr Camera Page';
-  static const IconData icon = Icons.camera;
-  static const String route = '/qr-camera-page';
-
+class QrCameraPage extends StatefulWidget implements PageInfo {
   const QrCameraPage({Key? key}) : super(key: key);
+
+  @override
+  String title() => 'Qr Camera Page';
+
+  @override
+  IconData icon() => Icons.camera;
+
+  @override
+  String route() => '/qr-camera-page';
 
   @override
   State<QrCameraPage> createState() => _QrCameraPageState();

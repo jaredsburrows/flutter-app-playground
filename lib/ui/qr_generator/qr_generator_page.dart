@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gradle_app_playground/ui/page_info.dart';
 import 'package:intl/intl.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screen_brightness/screen_brightness.dart';
@@ -11,12 +12,17 @@ import 'package:screen_brightness/screen_brightness.dart';
 
 // https://pub.dev/packages/qr_flutter/example
 // PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
-class QrGeneratorPage extends StatefulWidget {
-  static const String title = 'Qr Generator Page';
-  static const IconData icon = Icons.share;
-  static const String route = '/qr-generator-page';
-
+class QrGeneratorPage extends StatefulWidget implements PageInfo {
   const QrGeneratorPage({Key? key}) : super(key: key);
+
+  @override
+  String title() => 'Qr Generator Page';
+
+  @override
+  IconData icon() => Icons.share;
+
+  @override
+  String route() => '/qr-generator-page';
 
   @override
   State<QrGeneratorPage> createState() => _QrGeneratorPageState();
