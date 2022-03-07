@@ -7,6 +7,10 @@ import 'package:intl/intl.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
+// TODO need screen_brightness for web
+
+// https://pub.dev/packages/qr_flutter/example
+// PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
 class QrGeneratorPage extends StatefulWidget {
   static const String title = 'Qr Generator Page';
   static const IconData icon = Icons.share;

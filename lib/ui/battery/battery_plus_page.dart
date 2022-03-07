@@ -4,18 +4,20 @@ import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gradle_app_playground/ui/widget/drawer.dart';
 
-class BatteryInfoPage extends StatefulWidget {
-  static const String title = 'Battery Info Page';
+// https://pub.dev/packages/battery_plus
+// ANDROID IOS LINUX MACOS WEB WINDOWS
+class BatteryPage extends StatefulWidget {
+  static const String title = 'Battery Page';
   static const IconData icon = Icons.battery_full_outlined;
-  static const String route = '/battery-info-page';
+  static const String route = '/battery-page';
 
-  const BatteryInfoPage({Key? key}) : super(key: key);
+  const BatteryPage({Key? key}) : super(key: key);
 
   @override
-  _BatteryInfoPageState createState() => _BatteryInfoPageState();
+  _BatteryPageState createState() => _BatteryPageState();
 }
 
-class _BatteryInfoPageState extends State<BatteryInfoPage> {
+class _BatteryPageState extends State<BatteryPage> {
   final Battery _battery = Battery();
 
   BatteryState? _batteryState;

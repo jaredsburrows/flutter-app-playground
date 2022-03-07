@@ -7,6 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gradle_app_playground/main.dart';
 import 'package:video_player/video_player.dart';
 
+// https://pub.dev/packages/video_player
+// PLATFORM ANDROID IOS WEB
+// https://pub.dev/packages/camera
+// PLATFORM ANDROID IOS WEB
 class CameraPage extends StatefulWidget {
   static const String title = 'Camera Page';
   static const IconData icon = Icons.camera;
@@ -132,9 +136,6 @@ class _CameraPageState extends State<CameraPage>
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        title: const Text('Camera example'),
-      ),
       body: Column(
         children: <Widget>[
           Expanded(

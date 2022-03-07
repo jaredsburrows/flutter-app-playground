@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gradle_app_playground/ui/widget/drawer.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+// https://pub.dev/packages/package_info_plus
+// PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
 class PackageInfoPage extends StatefulWidget {
   static const String title = 'Package Info Page';
   static const IconData icon = Icons.info;
@@ -31,10 +32,6 @@ class _PackageInfoPageState extends State<PackageInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(PackageInfoPage.title),
-      ),
-      drawer: const AppDrawer(),
       body: Column(
         children: <Widget>[
           _infoTile('App name', _packageInfo.appName),

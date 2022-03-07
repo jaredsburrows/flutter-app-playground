@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gradle_app_playground/ui/battery_info/batter_info_page.dart';
+import 'package:flutter_gradle_app_playground/ui/battery/battery_plus_page.dart';
 import 'package:flutter_gradle_app_playground/ui/camera/camera_page.dart';
+import 'package:flutter_gradle_app_playground/ui/camera/camera_simple_page.dart';
 import 'package:flutter_gradle_app_playground/ui/chart/chart_page.dart';
-import 'package:flutter_gradle_app_playground/ui/package_info/package_info_page.dart';
+import 'package:flutter_gradle_app_playground/ui/connectivity/connectivity_plus_page.dart';
+import 'package:flutter_gradle_app_playground/ui/device/device_info_page.dart';
+import 'package:flutter_gradle_app_playground/ui/network/network_info_page.dart';
+import 'package:flutter_gradle_app_playground/ui/package/package_info_plus_page.dart';
 import 'package:flutter_gradle_app_playground/ui/profile/profile_page.dart';
 import 'package:flutter_gradle_app_playground/ui/qr_camera/qr_camera_page.dart';
 import 'package:flutter_gradle_app_playground/ui/qr_camera/qr_camera_page2.dart';
-import 'package:flutter_gradle_app_playground/ui/qr_generator/qr_generator.dart';
+import 'package:flutter_gradle_app_playground/ui/qr_camera/qr_camera_page3.dart';
+import 'package:flutter_gradle_app_playground/ui/qr_generator/qr_generator_page.dart';
+import 'package:flutter_gradle_app_playground/ui/sensors_page/sensors_page.dart';
+import 'package:flutter_gradle_app_playground/ui/share/share_page.dart';
 import 'package:tuple/tuple.dart';
 
 class DrawerItem extends Tuple3<StatefulWidget, String, IconData> {
@@ -25,21 +32,88 @@ class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
 
   // TODO handle saving state individually
-  final Map<int, DrawerItem> drawerMap = {
-    0: DrawerItem(const HomePage2(), HomePage2.title, HomePage2.icon),
-    1: DrawerItem(
-        const BatteryInfoPage(), BatteryInfoPage.title, BatteryInfoPage.icon),
-    2: DrawerItem(const CameraPage(), CameraPage.title, CameraPage.icon),
-    3: DrawerItem(const ChartPage(), ChartPage.title, ChartPage.icon),
-    4: DrawerItem(
-        const PackageInfoPage(), PackageInfoPage.title, PackageInfoPage.icon),
-    5: DrawerItem(const ProfilePage(), ProfilePage.title, ProfilePage.icon),
-    6: DrawerItem(const QrCameraPage(), QrCameraPage.title, QrCameraPage.icon),
-    7: DrawerItem(
-        const QrCameraPage2(), QrCameraPage2.title, QrCameraPage2.icon),
-    8: DrawerItem(
-        const QrGeneratorPage(), QrGeneratorPage.title, QrGeneratorPage.icon),
-  };
+  final drawerItems = [
+    DrawerItem(
+      const HomePage2(),
+      HomePage2.title,
+      HomePage2.icon,
+    ),
+    DrawerItem(
+      const BatteryPage(),
+      BatteryPage.title,
+      BatteryPage.icon,
+    ),
+    DrawerItem(
+      const CameraPage(),
+      CameraPage.title,
+      CameraPage.icon,
+    ),
+    DrawerItem(
+      const CameraSimplePage(),
+      CameraSimplePage.title,
+      CameraSimplePage.icon,
+    ),
+    DrawerItem(
+      const ChartPage(),
+      ChartPage.title,
+      ChartPage.icon,
+    ),
+    DrawerItem(
+      const ConnectivityPage(),
+      ConnectivityPage.title,
+      ConnectivityPage.icon,
+    ),
+    DrawerItem(
+      const DeviceInfoPage(),
+      DeviceInfoPage.title,
+      DeviceInfoPage.icon,
+    ),
+    DrawerItem(
+      const NetworkInfoPage(),
+      NetworkInfoPage.title,
+      NetworkInfoPage.icon,
+    ),
+    DrawerItem(
+      const PackageInfoPage(),
+      PackageInfoPage.title,
+      PackageInfoPage.icon,
+    ),
+    DrawerItem(
+      const ProfilePage(),
+      ProfilePage.title,
+      ProfilePage.icon,
+    ),
+    DrawerItem(
+      const QrCameraPage(),
+      QrCameraPage.title,
+      QrCameraPage.icon,
+    ),
+    DrawerItem(
+      const QrCameraPage2(),
+      QrCameraPage2.title,
+      QrCameraPage2.icon,
+    ),
+    DrawerItem(
+      const QrCameraPage3(),
+      QrCameraPage3.title,
+      QrCameraPage3.icon,
+    ),
+    DrawerItem(
+      const QrGeneratorPage(),
+      QrGeneratorPage.title,
+      QrGeneratorPage.icon,
+    ),
+    DrawerItem(
+      const SensorsPage(),
+      SensorsPage.title,
+      SensorsPage.icon,
+    ),
+    DrawerItem(
+      const SharePage(),
+      SharePage.title,
+      SharePage.icon,
+    ),
+  ];
 
   @override
   State<StatefulWidget> createState() {
@@ -54,14 +128,13 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     List<Widget> drawerOptions = [];
 
-    for (final entry in widget.drawerMap.entries) {
-      final drawerPosition = entry.key;
-      final drawerItem = entry.value;
+    for (var i = 0; i < widget.drawerItems.length; i++) {
+      var drawerItem = widget.drawerItems[i];
       drawerOptions.add(ListTile(
         leading: Icon(drawerItem.item3),
         title: Text(drawerItem.item2),
-        selected: drawerPosition == _selectedDrawerIndex,
-        onTap: () => _onSelectItem(drawerPosition),
+        selected: i == _selectedDrawerIndex,
+        onTap: () => _onSelectItem(i),
       ));
     }
     drawerOptions.add(
@@ -77,32 +150,37 @@ class HomePageState extends State<HomePage> {
 
     return Scaffold(
         appBar:
-            AppBar(title: Text(widget.drawerMap[_selectedDrawerIndex]!.title)),
+            AppBar(title: Text(widget.drawerItems[_selectedDrawerIndex].title)),
         drawer: Drawer(
-          child: Column(
+          child: ListView(
+            padding: EdgeInsets.zero,
             children: <Widget>[
-              DrawerHeader(
-                  margin: EdgeInsets.zero,
-                  padding: EdgeInsets.zero,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.fitWidth,
-                          image: AssetImage('res/images/Icon-512.png'))),
-                  child: Stack(children: const <Widget>[
-                    Positioned(
-                        bottom: 12.0,
-                        left: 16.0,
-                        child: Text('Jared Burrows',
-                            style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w500,
-                                color: Color.fromARGB(255, 0, 0, 0)))),
-                  ])),
-              Column(children: drawerOptions)
+              Column(
+                children: <Widget>[
+                  DrawerHeader(
+                      margin: EdgeInsets.zero,
+                      padding: EdgeInsets.zero,
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.fitWidth,
+                              image: AssetImage('res/images/Icon-512.png'))),
+                      child: Stack(children: const <Widget>[
+                        Positioned(
+                            bottom: 12.0,
+                            left: 16.0,
+                            child: Text('Jared Burrows',
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color.fromARGB(255, 0, 0, 0)))),
+                      ])),
+                  Column(children: drawerOptions)
+                ],
+              ),
             ],
           ),
         ),
-        body: widget.drawerMap[_selectedDrawerIndex]!.page);
+        body: widget.drawerItems[_selectedDrawerIndex].page);
   }
 
   _onSelectItem(int index) {
