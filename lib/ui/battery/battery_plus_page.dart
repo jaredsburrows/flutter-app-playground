@@ -2,16 +2,22 @@ import 'dart:async';
 
 import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gradle_app_playground/ui/page_info.dart';
 import 'package:flutter_gradle_app_playground/ui/widget/drawer.dart';
 
 // https://pub.dev/packages/battery_plus
 // ANDROID IOS LINUX MACOS WEB WINDOWS
-class BatteryPage extends StatefulWidget {
-  static const String title = 'Battery Page';
-  static const IconData icon = Icons.battery_full_outlined;
-  static const String route = '/battery-page';
-
+class BatteryPage extends StatefulWidget implements PageInfo {
   const BatteryPage({Key? key}) : super(key: key);
+
+  @override
+  String title() => 'Battery Page';
+
+  @override
+  IconData icon() => Icons.battery_full_outlined;
+
+  @override
+  String route() => '/battery-page';
 
   @override
   _BatteryPageState createState() => _BatteryPageState();

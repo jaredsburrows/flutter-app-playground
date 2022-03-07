@@ -1,15 +1,21 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gradle_app_playground/main.dart';
+import 'package:flutter_gradle_app_playground/ui/page_info.dart';
 
 // https://pub.dev/packages/camera
 // PLATFORM ANDROID IOS WEB
-class CameraSimplePage extends StatefulWidget {
-  static const String title = 'Camera Simple Page';
-  static const IconData icon = Icons.camera;
-  static const String route = '/camera-simple-page';
-
+class CameraSimplePage extends StatefulWidget implements PageInfo {
   const CameraSimplePage({Key? key}) : super(key: key);
+
+  @override
+  String title() => 'Camera Simple Page';
+
+  @override
+  IconData icon() => Icons.camera;
+
+  @override
+  String route() => '/camera-simple-page';
 
   @override
   _CameraSimplePageState createState() => _CameraSimplePageState();

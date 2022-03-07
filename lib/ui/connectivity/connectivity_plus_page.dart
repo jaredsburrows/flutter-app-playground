@@ -4,15 +4,21 @@ import 'dart:developer' as developer;
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gradle_app_playground/ui/page_info.dart';
 
 // https://pub.dev/packages/connectivity_plus
 // PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
-class ConnectivityPage extends StatefulWidget {
-  static const String title = 'Connectivity Page';
-  static const IconData icon = Icons.network_check;
-  static const String route = '/connectivity-page';
-
+class ConnectivityPage extends StatefulWidget implements PageInfo {
   const ConnectivityPage({Key? key}) : super(key: key);
+
+  @override
+  String title() => 'Connectivity Page';
+
+  @override
+  IconData icon() => Icons.network_check;
+
+  @override
+  String route() => '/connectivity-page';
 
   @override
   _ConnectivityPageState createState() => _ConnectivityPageState();

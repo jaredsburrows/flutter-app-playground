@@ -2,19 +2,25 @@ import 'dart:async';
 import 'dart:developer' as developer;
 import 'dart:io';
 
-import 'package:network_info_plus/network_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gradle_app_playground/ui/page_info.dart';
+import 'package:network_info_plus/network_info_plus.dart';
 
 // https://pub.dev/packages/network_info_plus
 // PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
-class NetworkInfoPage extends StatefulWidget {
-  static const String title = 'Network Info Page';
-  static const IconData icon = Icons.network_check;
-  static const String route = '/network-info-page';
-
+class NetworkInfoPage extends StatefulWidget implements PageInfo {
   const NetworkInfoPage({Key? key}) : super(key: key);
+
+  @override
+  String title() => 'Network Info Page';
+
+  @override
+  IconData icon() => Icons.network_check;
+
+  @override
+  String route() => '/network-info-page';
 
   @override
   _NetworkInfoPageState createState() => _NetworkInfoPageState();

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gradle_app_playground/ui/page_info.dart';
 
-class ProfilePage extends StatefulWidget {
-  static const String title = 'Profile Page';
-  static const IconData icon = Icons.person;
-  static const String route = '/profile-page';
-
+class ProfilePage extends StatefulWidget implements PageInfo {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  String title() => 'Profile Page';
+
+  @override
+  IconData icon() => Icons.person;
+
+  @override
+  String route() => '/profile-page';
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
