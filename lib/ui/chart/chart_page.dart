@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gradle_app_playground/ui/chart/line_chart_page.dart';
 import 'package:flutter_gradle_app_playground/ui/widget/drawer.dart';
 
+// https://pub.dev/packages/fl_chart
+// PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
 class ChartPage extends StatefulWidget {
   static const String title = 'Chart Page';
   static const IconData icon = Icons.show_chart;
