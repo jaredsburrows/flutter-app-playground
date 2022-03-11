@@ -22,7 +22,7 @@ class QrCameraPage2 extends StatefulWidget implements PageInfo {
 
 class _QrCameraPageState2 extends State<QrCameraPage2>
     with SingleTickerProviderStateMixin {
-  String? barcode;
+  String? _barcode;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +34,9 @@ class _QrCameraPageState2 extends State<QrCameraPage2>
             MobileScanner(
                 fit: BoxFit.contain,
                 onDetect: (barcode, args) {
-                  if (this.barcode != barcode.rawValue) {
+                  if (_barcode != barcode.rawValue) {
                     setState(() {
-                      this.barcode = barcode.rawValue;
+                      _barcode = barcode.rawValue;
                     });
                   }
                 }),
@@ -56,7 +56,7 @@ class _QrCameraPageState2 extends State<QrCameraPage2>
                         height: 50,
                         child: FittedBox(
                           child: Text(
-                            barcode ?? 'Scan something!',
+                            _barcode ?? 'Scan something!',
                             overflow: TextOverflow.fade,
                             style: Theme.of(context)
                                 .textTheme

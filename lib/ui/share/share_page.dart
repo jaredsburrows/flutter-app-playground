@@ -24,9 +24,9 @@ class SharePage extends StatefulWidget implements PageInfo {
 }
 
 class _SharePageState extends State<SharePage> {
-  String text = '';
-  String subject = '';
-  List<String> imagePaths = [];
+  final List<String> _imagePaths = [];
+  String _text = '';
+  String _subject = '';
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class _SharePageState extends State<SharePage> {
               ),
               maxLines: 2,
               onChanged: (String value) => setState(() {
-                text = value;
+                _text = value;
               }),
             ),
             TextField(
@@ -54,11 +54,11 @@ class _SharePageState extends State<SharePage> {
               ),
               maxLines: 2,
               onChanged: (String value) => setState(() {
-                subject = value;
+                _subject = value;
               }),
             ),
             const Padding(padding: EdgeInsets.only(top: 12.0)),
-            ImagePreviews(imagePaths, onDelete: _onDeleteImage),
+            ImagePreviews(_imagePaths, onDelete: _onDeleteImage),
             ListTile(
               leading: const Icon(Icons.add),
               title: const Text('Add image'),
@@ -69,7 +69,7 @@ class _SharePageState extends State<SharePage> {
                 );
                 if (pickedFile != null) {
                   setState(() {
-                    imagePaths.add(pickedFile.path);
+                    _imagePaths.add(pickedFile.path);
                   });
                 }
               },
@@ -78,7 +78,7 @@ class _SharePageState extends State<SharePage> {
             Builder(
               builder: (BuildContext context) {
                 return ElevatedButton(
-                  onPressed: text.isEmpty && imagePaths.isEmpty
+                  onPressed: _text.isEmpty && _imagePaths.isEmpty
                       ? null
                       : () => _onShare(context),
                   child: const Text('Share'),
@@ -93,7 +93,7 @@ class _SharePageState extends State<SharePage> {
 
   void _onDeleteImage(int position) {
     setState(() {
-      imagePaths.removeAt(position);
+      _imagePaths.removeAt(position);
     });
   }
 
@@ -107,14 +107,14 @@ class _SharePageState extends State<SharePage> {
     // has its position and size after it's built.
     final box = context.findRenderObject() as RenderBox?;
 
-    if (imagePaths.isNotEmpty) {
-      await Share.shareFiles(imagePaths,
-          text: text,
-          subject: subject,
+    if (_imagePaths.isNotEmpty) {
+      await Share.shareFiles(_imagePaths,
+          text: _text,
+          subject: _subject,
           sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
     } else {
-      await Share.share(text,
-          subject: subject,
+      await Share.share(_text,
+          subject: _subject,
           sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
     }
   }

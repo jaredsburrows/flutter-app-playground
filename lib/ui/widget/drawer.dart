@@ -20,8 +20,8 @@ class _AppDrawerState extends State<AppDrawer> {
         children: <Widget>[
           _createHeader(),
           PageListTile(
-              icon: HomePage.icon,
-              pageName: "${HomePage.title} (A/i/W)",
+              icon: const HomePage().icon(),
+              pageName: const HomePage().title(),
               isSelected: selectedIndex == index++,
               onTap: () {
                 setState(() {
@@ -30,7 +30,7 @@ class _AppDrawerState extends State<AppDrawer> {
 
                 Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => HomePage(),
+                  builder: (BuildContext context) => const HomePage(),
                 ));
               }),
           const Divider(),

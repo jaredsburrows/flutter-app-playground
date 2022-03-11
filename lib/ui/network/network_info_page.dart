@@ -27,8 +27,8 @@ class NetworkInfoPage extends StatefulWidget implements PageInfo {
 }
 
 class _NetworkInfoPageState extends State<NetworkInfoPage> {
-  String _connectionStatus = 'Unknown';
   final NetworkInfo _networkInfo = NetworkInfo();
+  String _connectionStatus = 'Unknown';
 
   @override
   void initState() {

@@ -25,14 +25,14 @@ class ConnectivityPage extends StatefulWidget implements PageInfo {
 }
 
 class _ConnectivityPageState extends State<ConnectivityPage> {
-  ConnectivityResult _connectionStatus = ConnectivityResult.none;
   final Connectivity _connectivity = Connectivity();
+  ConnectivityResult _connectionStatus = ConnectivityResult.none;
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
   void initState() {
     super.initState();
-    initConnectivity();
+    _initConnectivity();
 
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
@@ -45,7 +45,7 @@ class _ConnectivityPageState extends State<ConnectivityPage> {
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initConnectivity() async {
+  Future<void> _initConnectivity() async {
     late ConnectivityResult result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
