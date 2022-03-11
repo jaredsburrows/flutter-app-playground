@@ -9133,6 +9133,7 @@ permissive licensing, and of not having licensing issues being an
 obstacle to adoption, that text has been removed.
 --------------------------------------------------------------------------------
 geolocator
+geolocator_android
 geolocator_apple
 geolocator_platform_interface
 geolocator_web
@@ -9159,7 +9160,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 --------------------------------------------------------------------------------
-geolocator_android
 geolocator_windows
 
 MIT License
