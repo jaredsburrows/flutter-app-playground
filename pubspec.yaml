@@ -34,11 +34,11 @@ dependencies:
 
   # UI
   cupertino_icons: ^1.0.4
-  fl_chart: ^0.45.1
-  video_player: ^2.2.19
+  fl_chart: ^0.46.0
+  video_player: ^2.3.0
   # Hardware
   battery_plus: ^2.1.3
-  mobile_scanner: ^0.2.0
+  mobile_scanner: ^1.0.0
   qr_flutter: ^4.0.0
   package_info_plus: ^1.4.0
   camera: ^0.9.4+5
@@ -49,7 +49,7 @@ dependencies:
   sensors_plus: ^1.3.0
   # Utils
   share_plus: ^3.1.0
-  image_picker: ^0.8.4+10
+  image_picker: ^0.8.4+11
   # Libraries
   url_strategy: ^0.2.0
   intl: ^0.17.0
