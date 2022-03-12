@@ -48,14 +48,38 @@ class MainPage extends StatefulWidget {
   }
 }
 
-class MainPageState extends State<MainPage> {
+class MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin {
   final GlobalKey<ScaffoldState> _navigatorKey = GlobalKey();
   int _selectedDrawerIndex = 0;
 
   @override
-  Widget build(BuildContext context) {
-    List<Widget> drawerOptions = [];
+  bool get wantKeepAlive => true;
 
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+
+    List<Widget> drawerOptions = [];
+    // Drawer Header
+    drawerOptions.add(DrawerHeader(
+        margin: EdgeInsets.zero,
+        padding: EdgeInsets.zero,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.fitWidth,
+                image: AssetImage('res/images/Icon-512.png'))),
+        child: Stack(children: const <Widget>[
+          Positioned(
+              bottom: 12.0,
+              left: 16.0,
+              child: Text('Jared Burrows',
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black))),
+        ])));
+
+    // Drawer Items
     for (var i = 0; i < widget.drawerItems.length; i++) {
       var drawerItem = widget.drawerItems[i];
       drawerOptions.add(ListTile(
@@ -65,6 +89,8 @@ class MainPageState extends State<MainPage> {
         onTap: () => _onSelectItem(i),
       ));
     }
+
+    // End of Items
     drawerOptions.add(
       const Divider(),
     );
@@ -79,23 +105,20 @@ class MainPageState extends State<MainPage> {
     return WillPopScope(
       // Handle back button
       onWillPop: () async {
-        // If the drawer is open, close it
         if (_navigatorKey.currentState?.isDrawerOpen == true) {
+          // If the drawer is open, close it
           Navigator.pop(context);
           return false;
-        }
-        // Go back to the Home page if not there
-        else if (widget.drawerItems[_selectedDrawerIndex] is! HomePage) {
+        } else if (widget.drawerItems[_selectedDrawerIndex] is! HomePage) {
+          // Go back to the Home page if not there
           setState(() {
             _selectedDrawerIndex = 0;
           });
           return false;
-        }
-        // If on the Home page, close the app
-        else if (widget.drawerItems[_selectedDrawerIndex] is HomePage) {
+        } else if (widget.drawerItems[_selectedDrawerIndex] is HomePage) {
+          // If on the Home page, close the app
           return true;
         }
-
         // Default - exits app
         return true;
       },
@@ -104,31 +127,14 @@ class MainPageState extends State<MainPage> {
           appBar: AppBar(
               title: Text(widget.drawerItems[_selectedDrawerIndex].title())),
           drawer: Drawer(
+            // Maintain state of drawer - including the selected item
             key: const PageStorageKey('drawer-state'),
-            // TODO: use ListView.builder?
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                DrawerHeader(
-                    margin: EdgeInsets.zero,
-                    padding: EdgeInsets.zero,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.fitWidth,
-                            image: AssetImage('res/images/Icon-512.png'))),
-                    child: Stack(children: const <Widget>[
-                      Positioned(
-                          bottom: 12.0,
-                          left: 16.0,
-                          child: Text('Jared Burrows',
-                              style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 0, 0, 0)))),
-                    ])),
-                Column(children: drawerOptions),
-              ],
-            ),
+            child: ListView.builder(
+                padding: EdgeInsets.zero,
+                itemCount: drawerOptions.length,
+                itemBuilder: (context, index) {
+                  return drawerOptions[index];
+                }),
           ),
           body: widget.drawerItems[_selectedDrawerIndex] as StatefulWidget),
     );

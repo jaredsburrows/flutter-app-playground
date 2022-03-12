@@ -43,9 +43,11 @@ class _SharePageState extends State<SharePage> {
                 hintText: 'Enter some text and/or link to share',
               ),
               maxLines: 2,
-              onChanged: (String value) => setState(() {
-                _text = value;
-              }),
+              onChanged: (String value) {
+                setState(() {
+                  _text = value;
+                });
+              },
             ),
             TextField(
               decoration: const InputDecoration(
@@ -53,9 +55,11 @@ class _SharePageState extends State<SharePage> {
                 hintText: 'Enter subject to share (optional)',
               ),
               maxLines: 2,
-              onChanged: (String value) => setState(() {
-                _subject = value;
-              }),
+              onChanged: (String value) {
+                setState(() {
+                  _subject = value;
+                });
+              },
             ),
             const Padding(padding: EdgeInsets.only(top: 12.0)),
             ImagePreviews(_imagePaths, onDelete: _onDeleteImage),

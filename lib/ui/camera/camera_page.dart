@@ -132,7 +132,7 @@ class _CameraPageState extends State<CameraPage>
     if (state == AppLifecycleState.inactive) {
       cameraController.dispose();
     } else if (state == AppLifecycleState.resumed) {
-      onNewCameraSelected(cameraController.description);
+      _onNewCameraSelected(cameraController.description);
     }
   }
 
@@ -207,7 +207,7 @@ class _CameraPageState extends State<CameraPage>
               onScaleStart: _handleScaleStart,
               onScaleUpdate: _handleScaleUpdate,
               onTapDown: (TapDownDetails details) =>
-                  onViewFinderTap(details, constraints),
+                  _onViewFinderTap(details, constraints),
             );
           }),
         ),
@@ -284,7 +284,7 @@ class _CameraPageState extends State<CameraPage>
             IconButton(
               icon: const Icon(Icons.flash_on),
               color: Colors.blue,
-              onPressed: controller != null ? onFlashModeButtonPressed : null,
+              onPressed: controller != null ? _onFlashModeButtonPressed : null,
             ),
             // The exposure and focus mode are currently not supported on the web.
             ...!kIsWeb
@@ -293,21 +293,21 @@ class _CameraPageState extends State<CameraPage>
                       icon: const Icon(Icons.exposure),
                       color: Colors.blue,
                       onPressed: controller != null
-                          ? onExposureModeButtonPressed
+                          ? _onExposureModeButtonPressed
                           : null,
                     ),
                     IconButton(
                       icon: const Icon(Icons.filter_center_focus),
                       color: Colors.blue,
                       onPressed:
-                          controller != null ? onFocusModeButtonPressed : null,
+                          controller != null ? _onFocusModeButtonPressed : null,
                     )
                   ]
                 : <Widget>[],
             IconButton(
               icon: Icon(enableAudio ? Icons.volume_up : Icons.volume_mute),
               color: Colors.blue,
-              onPressed: controller != null ? onAudioModeButtonPressed : null,
+              onPressed: controller != null ? _onAudioModeButtonPressed : null,
             ),
             IconButton(
               icon: Icon(controller?.value.isCaptureOrientationLocked ?? false
@@ -315,7 +315,7 @@ class _CameraPageState extends State<CameraPage>
                   : Icons.screen_rotation),
               color: Colors.blue,
               onPressed: controller != null
-                  ? onCaptureOrientationLockButtonPressed
+                  ? _onCaptureOrientationLockButtonPressed
                   : null,
             ),
           ],
@@ -341,7 +341,7 @@ class _CameraPageState extends State<CameraPage>
                   ? Colors.orange
                   : Colors.blue,
               onPressed: controller != null
-                  ? () => onSetFlashModeButtonPressed(FlashMode.off)
+                  ? () => _onSetFlashModeButtonPressed(FlashMode.off)
                   : null,
             ),
             IconButton(
@@ -350,7 +350,7 @@ class _CameraPageState extends State<CameraPage>
                   ? Colors.orange
                   : Colors.blue,
               onPressed: controller != null
-                  ? () => onSetFlashModeButtonPressed(FlashMode.auto)
+                  ? () => _onSetFlashModeButtonPressed(FlashMode.auto)
                   : null,
             ),
             IconButton(
@@ -359,7 +359,7 @@ class _CameraPageState extends State<CameraPage>
                   ? Colors.orange
                   : Colors.blue,
               onPressed: controller != null
-                  ? () => onSetFlashModeButtonPressed(FlashMode.always)
+                  ? () => _onSetFlashModeButtonPressed(FlashMode.always)
                   : null,
             ),
             IconButton(
@@ -368,7 +368,7 @@ class _CameraPageState extends State<CameraPage>
                   ? Colors.orange
                   : Colors.blue,
               onPressed: controller != null
-                  ? () => onSetFlashModeButtonPressed(FlashMode.torch)
+                  ? () => _onSetFlashModeButtonPressed(FlashMode.torch)
                   : null,
             ),
           ],
@@ -408,12 +408,12 @@ class _CameraPageState extends State<CameraPage>
                     style: styleAuto,
                     onPressed: controller != null
                         ? () =>
-                            onSetExposureModeButtonPressed(ExposureMode.auto)
+                            _onSetExposureModeButtonPressed(ExposureMode.auto)
                         : null,
                     onLongPress: () {
                       if (controller != null) {
                         controller!.setExposurePoint(null);
-                        showInSnackBar('Resetting exposure point');
+                        _showInSnackBar('Resetting exposure point');
                       }
                     },
                   ),
@@ -422,7 +422,7 @@ class _CameraPageState extends State<CameraPage>
                     style: styleLocked,
                     onPressed: controller != null
                         ? () =>
-                            onSetExposureModeButtonPressed(ExposureMode.locked)
+                            _onSetExposureModeButtonPressed(ExposureMode.locked)
                         : null,
                   ),
                   TextButton(
@@ -450,7 +450,7 @@ class _CameraPageState extends State<CameraPage>
                     onChanged: _minAvailableExposureOffset ==
                             _maxAvailableExposureOffset
                         ? null
-                        : setExposureOffset,
+                        : _setExposureOffset,
                   ),
                   Text(_maxAvailableExposureOffset.toString()),
                 ],
@@ -492,20 +492,20 @@ class _CameraPageState extends State<CameraPage>
                     child: const Text('AUTO'),
                     style: styleAuto,
                     onPressed: controller != null
-                        ? () => onSetFocusModeButtonPressed(FocusMode.auto)
+                        ? () => _onSetFocusModeButtonPressed(FocusMode.auto)
                         : null,
                     onLongPress: () {
                       if (controller != null) {
                         controller!.setFocusPoint(null);
                       }
-                      showInSnackBar('Resetting focus point');
+                      _showInSnackBar('Resetting focus point');
                     },
                   ),
                   TextButton(
                     child: const Text('LOCKED'),
                     style: styleLocked,
                     onPressed: controller != null
-                        ? () => onSetFocusModeButtonPressed(FocusMode.locked)
+                        ? () => _onSetFocusModeButtonPressed(FocusMode.locked)
                         : null,
                   ),
                 ],
@@ -531,7 +531,7 @@ class _CameraPageState extends State<CameraPage>
           onPressed: cameraController != null &&
                   cameraController.value.isInitialized &&
                   !cameraController.value.isRecordingVideo
-              ? onTakePictureButtonPressed
+              ? _onTakePictureButtonPressed
               : null,
         ),
         IconButton(
@@ -540,7 +540,7 @@ class _CameraPageState extends State<CameraPage>
           onPressed: cameraController != null &&
                   cameraController.value.isInitialized &&
                   !cameraController.value.isRecordingVideo
-              ? onVideoRecordButtonPressed
+              ? _onVideoRecordButtonPressed
               : null,
         ),
         IconButton(
@@ -553,8 +553,8 @@ class _CameraPageState extends State<CameraPage>
                   cameraController.value.isInitialized &&
                   cameraController.value.isRecordingVideo
               ? (cameraController.value.isRecordingPaused)
-                  ? onResumeButtonPressed
-                  : onPauseButtonPressed
+                  ? _onResumeButtonPressed
+                  : _onPauseButtonPressed
               : null,
         ),
         IconButton(
@@ -563,7 +563,7 @@ class _CameraPageState extends State<CameraPage>
           onPressed: cameraController != null &&
                   cameraController.value.isInitialized &&
                   cameraController.value.isRecordingVideo
-              ? onStopButtonPressed
+              ? _onStopButtonPressed
               : null,
         ),
         IconButton(
@@ -573,7 +573,7 @@ class _CameraPageState extends State<CameraPage>
                   ? Colors.red
                   : Colors.blue,
           onPressed:
-              cameraController == null ? null : onPausePreviewButtonPressed,
+              cameraController == null ? null : _onPausePreviewButtonPressed,
         ),
       ],
     );
@@ -590,7 +590,7 @@ class _CameraPageState extends State<CameraPage>
         return;
       }
 
-      onNewCameraSelected(description);
+      _onNewCameraSelected(description);
     };
 
     if (cameras.isEmpty) {
@@ -617,14 +617,12 @@ class _CameraPageState extends State<CameraPage>
     return Row(children: toggles);
   }
 
-  String timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
-
-  void showInSnackBar(String message) {
+  void _showInSnackBar(String message) {
     // ignore: deprecated_member_use
     _scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(message)));
   }
 
-  void onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
+  void _onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
     if (controller == null) {
       return;
     }
@@ -639,7 +637,7 @@ class _CameraPageState extends State<CameraPage>
     cameraController.setFocusPoint(offset);
   }
 
-  Future<void> onNewCameraSelected(CameraDescription cameraDescription) async {
+  Future<void> _onNewCameraSelected(CameraDescription cameraDescription) async {
     if (controller != null) {
       await controller!.dispose();
     }
@@ -659,7 +657,7 @@ class _CameraPageState extends State<CameraPage>
         setState(() {});
       }
       if (cameraController.value.hasError) {
-        showInSnackBar(
+        _showInSnackBar(
             'Camera error ${cameraController.value.errorDescription}');
       }
     });
@@ -693,7 +691,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  void onTakePictureButtonPressed() {
+  void _onTakePictureButtonPressed() {
     takePicture().then((XFile? file) {
       if (mounted) {
         setState(() {
@@ -702,13 +700,13 @@ class _CameraPageState extends State<CameraPage>
           videoController = null;
         });
         if (file != null) {
-          showInSnackBar('Picture saved to ${file.path}');
+          _showInSnackBar('Picture saved to ${file.path}');
         }
       }
     });
   }
 
-  void onFlashModeButtonPressed() {
+  void _onFlashModeButtonPressed() {
     if (_flashModeControlRowAnimationController.value == 1) {
       _flashModeControlRowAnimationController.reverse();
     } else {
@@ -718,7 +716,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  void onExposureModeButtonPressed() {
+  void _onExposureModeButtonPressed() {
     if (_exposureModeControlRowAnimationController.value == 1) {
       _exposureModeControlRowAnimationController.reverse();
     } else {
@@ -728,7 +726,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  void onFocusModeButtonPressed() {
+  void _onFocusModeButtonPressed() {
     if (_focusModeControlRowAnimationController.value == 1) {
       _focusModeControlRowAnimationController.reverse();
     } else {
@@ -738,23 +736,23 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  void onAudioModeButtonPressed() {
+  void _onAudioModeButtonPressed() {
     enableAudio = !enableAudio;
     if (controller != null) {
-      onNewCameraSelected(controller!.description);
+      _onNewCameraSelected(controller!.description);
     }
   }
 
-  Future<void> onCaptureOrientationLockButtonPressed() async {
+  Future<void> _onCaptureOrientationLockButtonPressed() async {
     try {
       if (controller != null) {
         final CameraController cameraController = controller!;
         if (cameraController.value.isCaptureOrientationLocked) {
           await cameraController.unlockCaptureOrientation();
-          showInSnackBar('Capture orientation unlocked');
+          _showInSnackBar('Capture orientation unlocked');
         } else {
           await cameraController.lockCaptureOrientation();
-          showInSnackBar(
+          _showInSnackBar(
               'Capture orientation locked to ${cameraController.value.lockedCaptureOrientation.toString().split('.').last}');
         }
       }
@@ -763,59 +761,59 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  void onSetFlashModeButtonPressed(FlashMode mode) {
-    setFlashMode(mode).then((_) {
+  void _onSetFlashModeButtonPressed(FlashMode mode) {
+    _setFlashMode(mode).then((_) {
       if (mounted) {
         setState(() {});
       }
-      showInSnackBar('Flash mode set to ${mode.toString().split('.').last}');
+      _showInSnackBar('Flash mode set to ${mode.toString().split('.').last}');
     });
   }
 
-  void onSetExposureModeButtonPressed(ExposureMode mode) {
-    setExposureMode(mode).then((_) {
+  void _onSetExposureModeButtonPressed(ExposureMode mode) {
+    _setExposureMode(mode).then((_) {
       if (mounted) {
         setState(() {});
       }
-      showInSnackBar('Exposure mode set to ${mode.toString().split('.').last}');
+      _showInSnackBar('Exposure mode set to ${mode.toString().split('.').last}');
     });
   }
 
-  void onSetFocusModeButtonPressed(FocusMode mode) {
-    setFocusMode(mode).then((_) {
+  void _onSetFocusModeButtonPressed(FocusMode mode) {
+    _setFocusMode(mode).then((_) {
       if (mounted) {
         setState(() {});
       }
-      showInSnackBar('Focus mode set to ${mode.toString().split('.').last}');
+      _showInSnackBar('Focus mode set to ${mode.toString().split('.').last}');
     });
   }
 
-  void onVideoRecordButtonPressed() {
-    startVideoRecording().then((_) {
+  void _onVideoRecordButtonPressed() {
+    _startVideoRecording().then((_) {
       if (mounted) {
         setState(() {});
       }
     });
   }
 
-  void onStopButtonPressed() {
-    stopVideoRecording().then((XFile? file) {
+  void _onStopButtonPressed() {
+    _stopVideoRecording().then((XFile? file) {
       if (mounted) {
         setState(() {});
       }
       if (file != null) {
-        showInSnackBar('Video recorded to ${file.path}');
+        _showInSnackBar('Video recorded to ${file.path}');
         videoFile = file;
         _startVideoPlayer();
       }
     });
   }
 
-  Future<void> onPausePreviewButtonPressed() async {
+  Future<void> _onPausePreviewButtonPressed() async {
     final CameraController? cameraController = controller;
 
     if (cameraController == null || !cameraController.value.isInitialized) {
-      showInSnackBar('Error: select a camera first.');
+      _showInSnackBar('Error: select a camera first.');
       return;
     }
 
@@ -830,29 +828,29 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  void onPauseButtonPressed() {
-    pauseVideoRecording().then((_) {
+  void _onPauseButtonPressed() {
+    _pauseVideoRecording().then((_) {
       if (mounted) {
         setState(() {});
       }
-      showInSnackBar('Video recording paused');
+      _showInSnackBar('Video recording paused');
     });
   }
 
-  void onResumeButtonPressed() {
-    resumeVideoRecording().then((_) {
+  void _onResumeButtonPressed() {
+    _resumeVideoRecording().then((_) {
       if (mounted) {
         setState(() {});
       }
-      showInSnackBar('Video recording resumed');
+      _showInSnackBar('Video recording resumed');
     });
   }
 
-  Future<void> startVideoRecording() async {
+  Future<void> _startVideoRecording() async {
     final CameraController? cameraController = controller;
 
     if (cameraController == null || !cameraController.value.isInitialized) {
-      showInSnackBar('Error: select a camera first.');
+      _showInSnackBar('Error: select a camera first.');
       return;
     }
 
@@ -869,7 +867,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  Future<XFile?> stopVideoRecording() async {
+  Future<XFile?> _stopVideoRecording() async {
     final CameraController? cameraController = controller;
 
     if (cameraController == null || !cameraController.value.isRecordingVideo) {
@@ -884,7 +882,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  Future<void> pauseVideoRecording() async {
+  Future<void> _pauseVideoRecording() async {
     final CameraController? cameraController = controller;
 
     if (cameraController == null || !cameraController.value.isRecordingVideo) {
@@ -899,7 +897,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  Future<void> resumeVideoRecording() async {
+  Future<void> _resumeVideoRecording() async {
     final CameraController? cameraController = controller;
 
     if (cameraController == null || !cameraController.value.isRecordingVideo) {
@@ -914,7 +912,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  Future<void> setFlashMode(FlashMode mode) async {
+  Future<void> _setFlashMode(FlashMode mode) async {
     if (controller == null) {
       return;
     }
@@ -927,7 +925,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  Future<void> setExposureMode(ExposureMode mode) async {
+  Future<void> _setExposureMode(ExposureMode mode) async {
     if (controller == null) {
       return;
     }
@@ -940,7 +938,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  Future<void> setExposureOffset(double offset) async {
+  Future<void> _setExposureOffset(double offset) async {
     if (controller == null) {
       return;
     }
@@ -956,7 +954,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  Future<void> setFocusMode(FocusMode mode) async {
+  Future<void> _setFocusMode(FocusMode mode) async {
     if (controller == null) {
       return;
     }
@@ -1003,7 +1001,7 @@ class _CameraPageState extends State<CameraPage>
   Future<XFile?> takePicture() async {
     final CameraController? cameraController = controller;
     if (cameraController == null || !cameraController.value.isInitialized) {
-      showInSnackBar('Error: select a camera first.');
+      _showInSnackBar('Error: select a camera first.');
       return null;
     }
 
@@ -1022,7 +1020,7 @@ class _CameraPageState extends State<CameraPage>
   }
 
   void _showCameraException(CameraException e) {
-    showInSnackBar('Error: ${e.code}\n${e.description}');
+    _showInSnackBar('Error: ${e.code}\n${e.description}');
   }
 }
 

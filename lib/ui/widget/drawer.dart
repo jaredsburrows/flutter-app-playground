@@ -30,7 +30,9 @@ class _AppDrawerState extends State<AppDrawer> {
 
                 Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => const HomePage(),
+                  builder: (BuildContext context) {
+                    return const HomePage();
+                  },
                 ));
               }),
           const Divider(),
