@@ -22,13 +22,13 @@ class CameraSimplePage extends StatefulWidget implements PageInfo {
 }
 
 class _CameraSimplePageState extends State<CameraSimplePage> {
-  late CameraController controller;
+  late CameraController _controller;
 
   @override
   void initState() {
     super.initState();
-    controller = CameraController(cameras[0], ResolutionPreset.max);
-    controller.initialize().then((_) {
+    _controller = CameraController(cameras[0], ResolutionPreset.max);
+    _controller.initialize().then((_) {
       if (!mounted) {
         return;
       }
@@ -38,15 +38,15 @@ class _CameraSimplePageState extends State<CameraSimplePage> {
 
   @override
   void dispose() {
-    controller.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (!controller.value.isInitialized) {
+    if (!_controller.value.isInitialized) {
       return Container();
     }
-    return CameraPreview(controller);
+    return CameraPreview(_controller);
   }
 }

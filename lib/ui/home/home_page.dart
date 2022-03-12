@@ -17,8 +17,10 @@ class HomePage extends StatefulWidget implements PageInfo {
   _HomePageState createState() => _HomePageState();
 }
 
+// TODO: better way to save state
+int _counter = 0;
+
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
 
   @override
   Widget build(BuildContext context) {

@@ -24,70 +24,80 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Material(
       child: Builder(
-        builder: (context) => Scaffold(
-          body: ListView(
-            physics: const BouncingScrollPhysics(),
-            children: [
-              const SizedBox(height: 48),
-              ProfileWidget(
-                imagePath: user.imagePath,
-                onClicked: () {
-                  // Navigator.of(context).push(
-                  //   MaterialPageRoute(builder: (context) => EditProfilePage()),
-                  // );
-                },
-              ),
-              const SizedBox(height: 24),
-              buildName(user),
-              const SizedBox(height: 24),
-              Center(child: buildUpgradeButton()),
-              const SizedBox(height: 24),
-              const NumbersWidget(),
-              const SizedBox(height: 48),
-              buildAbout(user),
-            ],
-          ),
-        ),
+        builder: (context) {
+          return Scaffold(
+            body: ListView(
+              physics: const BouncingScrollPhysics(),
+              children: [
+                const SizedBox(height: 48),
+                ProfileWidget(
+                  imagePath: user.imagePath,
+                  onClicked: () {
+                    // Navigator.of(context).push(
+                    //   MaterialPageRoute(builder: (context) => EditProfilePage()),
+                    // );
+                  },
+                ),
+                const SizedBox(height: 24),
+                _buildName(user),
+                const SizedBox(height: 24),
+                Center(
+                  child: _buildUpgradeButton(),
+                ),
+                const SizedBox(height: 24),
+                const NumbersWidget(),
+                const SizedBox(height: 48),
+                _buildAbout(user),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
 
-  Widget buildName(User user) => Column(
-        children: [
-          Text(
-            user.name,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            user.email,
-            style: const TextStyle(color: Colors.grey),
-          )
-        ],
-      );
-
-  Widget buildUpgradeButton() => ButtonWidget(
-        text: 'Upgrade To PRO',
-        onClicked: () {},
-      );
-
-  Widget buildAbout(User user) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 48),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'About',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              user.about,
-              style: const TextStyle(fontSize: 16, height: 1.4),
-            ),
-          ],
+  Widget _buildName(User user) {
+    return Column(
+      children: [
+        Text(
+          user.name,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
         ),
-      );
+        const SizedBox(height: 4),
+        Text(
+          user.email,
+          style: const TextStyle(color: Colors.grey),
+        )
+      ],
+    );
+  }
+
+  Widget _buildUpgradeButton() {
+    return ButtonWidget(
+      text: 'Upgrade To PRO',
+      onClicked: () {},
+    );
+  }
+
+  Widget _buildAbout(User user) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 48),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'About',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            "${user.about}\n${user.about}\n${user.about}",
+            style: const TextStyle(fontSize: 16, height: 1.4),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class ProfileWidget extends StatelessWidget {
@@ -109,18 +119,18 @@ class ProfileWidget extends StatelessWidget {
     return Center(
       child: Stack(
         children: [
-          buildImage(),
+          _buildImage(),
           Positioned(
             bottom: 0,
             right: 4,
-            child: buildEditIcon(color),
+            child: _buildEditIcon(color),
           ),
         ],
       ),
     );
   }
 
-  Widget buildImage() {
+  Widget _buildImage() {
     final image = NetworkImage(imagePath);
 
     return ClipOval(
@@ -137,32 +147,35 @@ class ProfileWidget extends StatelessWidget {
     );
   }
 
-  Widget buildEditIcon(Color color) => buildCircle(
-        color: Colors.white,
-        all: 3,
-        child: buildCircle(
-          color: color,
-          all: 8,
-          child: Icon(
-            isEdit ? Icons.add_a_photo : Icons.edit,
-            color: Colors.white,
-            size: 20,
-          ),
+  Widget _buildEditIcon(Color color) {
+    return _buildCircle(
+      color: Colors.white,
+      all: 3,
+      child: _buildCircle(
+        color: color,
+        all: 8,
+        child: Icon(
+          isEdit ? Icons.add_a_photo : Icons.edit,
+          color: Colors.white,
+          size: 20,
         ),
-      );
+      ),
+    );
+  }
 
-  Widget buildCircle({
+  Widget _buildCircle({
     required Widget child,
     required double all,
     required Color color,
-  }) =>
-      ClipOval(
-        child: Container(
-          padding: EdgeInsets.all(all),
-          color: color,
-          child: child,
-        ),
-      );
+  }) {
+    return ClipOval(
+      child: Container(
+        padding: EdgeInsets.all(all),
+        color: color,
+        child: child,
+      ),
+    );
+  }
 }
 
 class ButtonWidget extends StatelessWidget {
@@ -176,15 +189,17 @@ class ButtonWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shape: const StadiumBorder(),
-          onPrimary: Colors.white,
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-        ),
-        child: Text(text),
-        onPressed: onClicked,
-      );
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        shape: const StadiumBorder(),
+        onPrimary: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+      ),
+      child: Text(text),
+      onPressed: onClicked,
+    );
+  }
 }
 
 class User {
@@ -207,43 +222,48 @@ class NumbersWidget extends StatelessWidget {
   const NumbersWidget({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        _buildButton(context, '4.8', 'Ranking'),
+        _buildDivider(),
+        _buildButton(context, '35', 'Following'),
+        _buildDivider(),
+        _buildButton(context, '50', 'Followers'),
+      ],
+    );
+  }
+
+  Widget _buildDivider() {
+    return const SizedBox(
+      height: 24,
+      child: VerticalDivider(),
+    );
+  }
+
+  Widget _buildButton(BuildContext context, String value, String text) {
+    return MaterialButton(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      onPressed: () {},
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          buildButton(context, '4.8', 'Ranking'),
-          buildDivider(),
-          buildButton(context, '35', 'Following'),
-          buildDivider(),
-          buildButton(context, '50', 'Followers'),
+          Text(
+            value,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            text,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
         ],
-      );
-
-  Widget buildDivider() => const SizedBox(
-        height: 24,
-        child: VerticalDivider(),
-      );
-
-  Widget buildButton(BuildContext context, String value, String text) =>
-      MaterialButton(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        onPressed: () {},
-        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              value,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              text,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      );
+      ),
+    );
+  }
 }
 
 class UserPreferences {

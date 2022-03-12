@@ -86,7 +86,7 @@ jobs:
         uses: actions/upload-artifact@v2.3.1
         if: always()
         with:
-          name: android-gif-example-${{ github.workflow }}-${{ github.run_id }}
+          name: flutter-app-playground-${{ github.workflow }}-${{ github.run_id }}
           path: |
             build/app/outputs/apk/release
             build/app/outputs/bundle/release
