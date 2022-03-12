@@ -23,6 +23,8 @@ class SensorsPage extends StatefulWidget implements PageInfo {
 }
 
 class _SensorsPageState extends State<SensorsPage> {
+  final _streamSubscriptions = <StreamSubscription<dynamic>>[];
+
   static const int _snakeRows = 20;
   static const int _snakeColumns = 20;
   static const double _snakeCellSize = 10.0;
@@ -31,7 +33,6 @@ class _SensorsPageState extends State<SensorsPage> {
   List<double>? _userAccelerometerValues;
   List<double>? _gyroscopeValues;
   List<double>? _magnetometerValues;
-  final _streamSubscriptions = <StreamSubscription<dynamic>>[];
 
   @override
   Widget build(BuildContext context) {

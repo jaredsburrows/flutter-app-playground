@@ -25,7 +25,6 @@ class BatteryPage extends StatefulWidget implements PageInfo {
 
 class _BatteryPageState extends State<BatteryPage> {
   final Battery _battery = Battery();
-
   BatteryState? _batteryState;
   StreamSubscription<BatteryState>? _batteryStateSubscription;
 
@@ -43,13 +42,6 @@ class _BatteryPageState extends State<BatteryPage> {
     if (_batteryStateSubscription != null) {
       _batteryStateSubscription!.cancel();
     }
-  }
-
-  void _updateBatteryState(BatteryState state) {
-    if (_batteryState == state) return;
-    setState(() {
-      _batteryState = state;
-    });
   }
 
   @override
@@ -103,6 +95,13 @@ class _BatteryPageState extends State<BatteryPage> {
         ],
       ),
     );
+  }
+
+  void _updateBatteryState(BatteryState state) {
+    if (_batteryState == state) return;
+    setState(() {
+      _batteryState = state;
+    });
   }
 
   Widget _infoTile(String title, String subtitle) {

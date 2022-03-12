@@ -25,14 +25,13 @@ class ChartPage extends StatefulWidget implements PageInfo {
 }
 
 class _ChartPageState extends State<ChartPage> {
-  int _currentPage = 0;
-
   final _controller = PageController(initialPage: 0);
   final _duration = const Duration(milliseconds: 300);
   final _curve = Curves.easeInOutCubic;
   final _pages = const [
     LineChartPage(),
   ];
+  int _currentPage = 0;
 
   bool get isDesktopOrWeb => PlatformInfo().isDesktopOrWeb();
 

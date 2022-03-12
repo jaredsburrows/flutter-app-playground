@@ -21,7 +21,7 @@ class QrCameraPage3 extends StatefulWidget implements PageInfo {
 }
 
 class _QrCameraPage3State extends State<QrCameraPage3> {
-  Result? currentResult;
+  Result? _currentResult;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _QrCameraPage3State extends State<QrCameraPage3> {
             scanInvertedQRCode: true,
             onCapture: (Result result) {
               setState(() {
-                currentResult = result;
+                _currentResult = result;
               });
             },
           ),
@@ -49,9 +49,9 @@ class _QrCameraPage3State extends State<QrCameraPage3> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Text: ${currentResult?.text ?? 'Not found'}'),
+                  Text('Text: ${_currentResult?.text ?? 'Not found'}'),
                   Text(
-                      'Format: ${currentResult?.barcodeFormat ?? 'Not found'}'),
+                      'Format: ${_currentResult?.barcodeFormat ?? 'Not found'}'),
                 ],
               ),
             ),
