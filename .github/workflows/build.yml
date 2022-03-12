@@ -36,8 +36,9 @@ jobs:
       - name: Configure JDK
         uses: actions/setup-java@v3.0.0
         with:
-          distribution: temurin
           java-version: 11
+          distribution: temurin
+          cache: gradle
       - run: |
           java -version
 
@@ -90,8 +91,9 @@ jobs:
       - name: Configure JDK
         uses: actions/setup-java@v3.0.0
         with:
-          distribution: temurin
           java-version: 11
+          distribution: temurin
+          cache: gradle
 
       - name: Configure Dart
         uses: dart-lang/setup-dart@v1.3
@@ -147,8 +149,9 @@ jobs:
       - name: Configure JDK
         uses: actions/setup-java@v3.0.0
         with:
-          distribution: temurin
           java-version: 11
+          distribution: temurin
+          cache: gradle
 
       - name: Configure Dart
         uses: dart-lang/setup-dart@v1.3
@@ -202,8 +205,9 @@ jobs:
       - name: Configure JDK
         uses: actions/setup-java@v2.5.0
         with:
-          distribution: temurin
           java-version: 11
+          distribution: temurin
+          cache: gradle
 
       - name: Configure Dart
         uses: dart-lang/setup-dart@v1.3
@@ -248,8 +252,9 @@ jobs:
       - name: Configure JDK
         uses: actions/setup-java@v3.0.0
         with:
-          distribution: temurin
           java-version: 11
+          distribution: temurin
+          cache: gradle
 
       - name: Configure Dart
         uses: dart-lang/setup-dart@v1.3
