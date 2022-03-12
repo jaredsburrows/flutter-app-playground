@@ -97,12 +97,19 @@ jobs:
         uses: dart-lang/setup-dart@v1.3
         with:
           sdk: 2.16.1
+      - run: |
+          dart --disable-analytics
+          dart --version
 
       - name: Configure Flutter
         uses: subosito/flutter-action@v2.3.0
         with:
           flutter-version: 2.10.2
           channel: stable
+      - run: |
+          flutter config --enable-android --no-analytics
+          flutter doctor -v
+          flutter --version
 
       - name: Build Android
         run: |
@@ -118,6 +125,67 @@ jobs:
             build/app/outputs/bundle/release
             build/app/outputs/symbols-apk
             build/app/outputs/symbols-appbundle
+          if-no-files-found: warn
+
+  linux:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v3.0.0
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1.0.4
+
+      - name: Cache Dependencies
+        uses: actions/cache@v2.1.7
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper/
+            ~/.android/build-cache
+            $FLUTTER_HOME/.pub-cache
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/android/*.gradle*', '**/android/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle
+
+      - name: Configure JDK
+        uses: actions/setup-java@v3.0.0
+        with:
+          distribution: temurin
+          java-version: 11
+
+      - name: Configure Dart
+        uses: dart-lang/setup-dart@v1.3
+        with:
+          sdk: 2.16.1
+      - run: |
+          dart --disable-analytics
+          dart --version
+
+      - name: Configure Flutter
+        uses: subosito/flutter-action@v2.3.0
+        with:
+          flutter-version: 2.10.2
+          channel: stable
+      - run: |
+          flutter config --enable-linux-desktop --no-analytics
+          flutter doctor -v
+          flutter --version
+
+      - name: Build Linux
+        run: |
+          flutter build linux --release --dart-define RELEASE=true
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3.0.0
+        if: always()
+        with:
+          name: flutter-app-playground-android-${{ github.workflow }}-${{ github.run_id }}
+          path: |
+            build/linux
           if-no-files-found: warn
 
   ios:
@@ -154,12 +222,19 @@ jobs:
         uses: dart-lang/setup-dart@v1.3
         with:
           sdk: 2.16.1
+      - run: |
+          dart --disable-analytics
+          dart --version
 
       - name: Configure Flutter
         uses: subosito/flutter-action@v2.3.0
         with:
           flutter-version: 2.10.2
           channel: stable
+      - run: |
+          flutter config --enable-ios --no-analytics
+          flutter doctor -v
+          flutter --version
 
       - name: Build iOS
         run: |
@@ -209,12 +284,19 @@ jobs:
         uses: dart-lang/setup-dart@v1.3
         with:
           sdk: 2.16.1
+      - run: |
+          dart --disable-analytics
+          dart --version
 
       - name: Configure Flutter
         uses: subosito/flutter-action@v2.3.0
         with:
           flutter-version: 2.10.2
           channel: stable
+      - run: |
+          flutter config --enable-web --no-analytics
+          flutter doctor -v
+          flutter --version
 
       - name: Build Website
         run: |
@@ -255,12 +337,19 @@ jobs:
         uses: dart-lang/setup-dart@v1.3
         with:
           sdk: 2.16.1
+      - run: |
+          dart --disable-analytics
+          dart --version
 
       - name: Configure Flutter
         uses: subosito/flutter-action@v2.3.0
         with:
           flutter-version: 2.10.2
           channel: stable
+      - run: |
+          flutter config --enable-web --no-analytics
+          flutter doctor -v
+          flutter --version
 
       - name: Build Website
         run: |
