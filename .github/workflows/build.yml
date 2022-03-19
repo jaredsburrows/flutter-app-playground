@@ -186,7 +186,7 @@ jobs:
 
       - name: Build Website
         run: |
-          flutter build web --release --dart-define RELEASE=true --base-href /flutter-gradle-app-playground/
+          flutter build web --release --dart-define RELEASE=true --web-renderer html --base-href /flutter-gradle-app-playground/
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3.0.0
