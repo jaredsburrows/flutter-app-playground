@@ -6,7 +6,7 @@ import 'package:flutter_gradle_app_playground/ui/page_info.dart';
 import 'package:flutter_gradle_app_playground/ui/widget/drawer.dart';
 
 // https://pub.dev/packages/battery_plus
-// ANDROID IOS LINUX MACOS WEB WINDOWS
+// PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
 class BatteryPage extends StatefulWidget implements PageInfo {
   const BatteryPage({Key? key}) : super(key: key);
 

@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 
 abstract class PageInfo {
-  String title() {
-    return "";
-  }
+  String title() => "";
 
-  IconData icon() {
-    return Icons.disabled_by_default_sharp;
-  }
+  IconData icon() => Icons.disabled_by_default_sharp;
 
-  String route() {
-    return "";
-  }
+  String route() => "";
 }

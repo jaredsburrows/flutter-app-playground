@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gradle_app_playground/ui/battery/battery_plus_page.dart';
+import 'package:flutter_gradle_app_playground/ui/bluetooth/bluetooth_page.dart';
 import 'package:flutter_gradle_app_playground/ui/camera/camera_page.dart';
 import 'package:flutter_gradle_app_playground/ui/camera/camera_simple_page.dart';
 import 'package:flutter_gradle_app_playground/ui/chart/chart_page.dart';
@@ -31,6 +32,7 @@ class MainPage extends StatefulWidget {
   final List<PageInfo> drawerItems = const [
     HomePage(), // "Landing" home state
     BatteryPage(),
+    BluetoothPage(),
     CameraPage(),
     CameraSimplePage(),
     ChartPage(),
