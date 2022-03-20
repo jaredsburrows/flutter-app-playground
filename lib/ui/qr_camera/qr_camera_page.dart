@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gradle_app_playground/ui/page_info.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 // https://pub.dev/packages/mobile_scanner
@@ -25,9 +26,12 @@ class _QrCameraPageState extends State<QrCameraPage>
   String? _barcode;
 
   MobileScannerController controller = MobileScannerController(
-    torchEnabled: false,
-    facing: CameraFacing.back,
+    torchEnabled: true,
+    // formats: [BarcodeFormat.qrCode]
+    // facing: CameraFacing.front,
   );
+
+  bool isStarted = true;
 
   @override
   Widget build(BuildContext context) {
@@ -39,16 +43,15 @@ class _QrCameraPageState extends State<QrCameraPage>
             MobileScanner(
                 controller: controller,
                 fit: BoxFit.contain,
+                // allowDuplicates: true,
                 // controller: MobileScannerController(
                 //   torchEnabled: true,
                 //   facing: CameraFacing.front,
                 // ),
                 onDetect: (barcode, args) {
-                  if (_barcode != barcode.rawValue) {
-                    setState(() {
-                      _barcode = barcode.rawValue;
-                    });
-                  }
+                  setState(() {
+                    _barcode = barcode.rawValue;
+                  });
                 }),
             Align(
               alignment: Alignment.bottomCenter,
@@ -78,9 +81,21 @@ class _QrCameraPageState extends State<QrCameraPage>
                       iconSize: 32.0,
                       onPressed: () => controller.toggleTorch(),
                     ),
+                    IconButton(
+                        color: Colors.white,
+                        icon: isStarted
+                            ? const Icon(Icons.stop)
+                            : const Icon(Icons.play_arrow),
+                        iconSize: 32.0,
+                        onPressed: () => setState(() {
+                              isStarted
+                                  ? controller.stop()
+                                  : controller.start();
+                              isStarted = !isStarted;
+                            })),
                     Center(
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width - 120,
+                        width: MediaQuery.of(context).size.width - 200,
                         height: 50,
                         child: FittedBox(
                           child: Text(
@@ -109,6 +124,32 @@ class _QrCameraPageState extends State<QrCameraPage>
                       ),
                       iconSize: 32.0,
                       onPressed: () => controller.switchCamera(),
+                    ),
+                    IconButton(
+                      color: Colors.white,
+                      icon: const Icon(Icons.image),
+                      iconSize: 32.0,
+                      onPressed: () async {
+                        final ImagePicker _picker = ImagePicker();
+                        // Pick an image
+                        final XFile? image = await _picker.pickImage(
+                            source: ImageSource.gallery);
+                        if (image != null) {
+                          if (await controller.analyzeImage(image.path)) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text('Barcode found!'),
+                              backgroundColor: Colors.green,
+                            ));
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text('No barcode found!'),
+                              backgroundColor: Colors.red,
+                            ));
+                          }
+                        }
+                      },
                     ),
                   ],
                 ),

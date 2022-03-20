@@ -33,12 +33,11 @@ class _QrCameraPageState2 extends State<QrCameraPage2>
           children: [
             MobileScanner(
                 fit: BoxFit.contain,
+                // allowDuplicates: false,
                 onDetect: (barcode, args) {
-                  if (_barcode != barcode.rawValue) {
-                    setState(() {
-                      _barcode = barcode.rawValue;
-                    });
-                  }
+                  setState(() {
+                    _barcode = barcode.rawValue;
+                  });
                 }),
             Align(
               alignment: Alignment.bottomCenter,
