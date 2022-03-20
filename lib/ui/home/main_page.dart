@@ -17,6 +17,12 @@ import 'package:flutter_gradle_app_playground/ui/qr_camera/qr_camera_page3.dart'
 import 'package:flutter_gradle_app_playground/ui/qr_generator/qr_generator_page.dart';
 import 'package:flutter_gradle_app_playground/ui/sensors_page/sensors_page.dart';
 import 'package:flutter_gradle_app_playground/ui/share/share_page.dart';
+import 'package:flutter_gradle_app_playground/ui/sms/sms_page.dart';
+import 'package:flutter_gradle_app_playground/ui/video/video_page.dart';
+import 'package:flutter_gradle_app_playground/ui/video/video_page2.dart';
+import 'package:flutter_gradle_app_playground/ui/widget/widget_grouped_list_page.dart';
+import 'package:flutter_gradle_app_playground/ui/widget/widget_infinite_listview_page.dart';
+import 'package:flutter_gradle_app_playground/ui/widget/widget_sticky_headers_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -40,6 +46,12 @@ class MainPage extends StatefulWidget {
     QrGeneratorPage(),
     SensorsPage(),
     SharePage(),
+    SmsPage(),
+    VideoPage(),
+    VideoPage2(),
+    WidgetGroupedListPage(),
+    WidgetInfiniteListviewPage(),
+    WidgetStickyHeadersPage(),
   ];
 
   @override
