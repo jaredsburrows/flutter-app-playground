@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gradle_app_playground/ui/page_info.dart';
-import 'package:flutter_gradle_app_playground/ui/widget/drawer.dart';
+import 'package:flutter_app_playground/ui/page_info.dart';
+import 'package:flutter_app_playground/ui/widget/drawer.dart';
 
 // https://pub.dev/packages/battery_plus
 // ANDROID IOS LINUX MACOS WEB WINDOWS

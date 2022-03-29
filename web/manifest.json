@@ -1,6 +1,6 @@
 {
-    "name": "flutter_gradle_app_playground",
-    "short_name": "flutter_gradle_app_playground",
+    "name": "flutter_app_playground",
+    "short_name": "flutter_app_playground",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

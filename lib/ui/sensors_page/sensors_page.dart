@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gradle_app_playground/ui/page_info.dart';
+import 'package:flutter_app_playground/ui/page_info.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
 // https://pub.dev/packages/sensors_plus

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gradle_app_playground/ui/page_info.dart';
+import 'package:flutter_app_playground/ui/page_info.dart';
 import 'package:qr_code_dart_scan/qr_code_dart_scan.dart';
 
 // https://pub.dev/packages/qr_code_dart_scan

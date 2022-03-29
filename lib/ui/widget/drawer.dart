@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gradle_app_playground/ui/home/home_page.dart';
+import 'package:flutter_app_playground/ui/home/home_page.dart';
 
 int selectedIndex = 0;
 int index = 0;
