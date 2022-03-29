@@ -4,7 +4,7 @@ import 'dart:developer' as developer;
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gradle_app_playground/ui/page_info.dart';
+import 'package:flutter_app_playground/ui/page_info.dart';
 
 // https://pub.dev/packages/connectivity_plus
 // PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gradle_app_playground/ui/page_info.dart';
+import 'package:flutter_app_playground/ui/page_info.dart';
 
 class HomePage extends StatefulWidget implements PageInfo {
   const HomePage({Key? key}) : super(key: key);

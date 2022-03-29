@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gradle_app_playground/ui/chart/line_chart_sample1.dart';
-import 'package:flutter_gradle_app_playground/ui/chart/line_chart_sample2.dart';
+import 'package:flutter_app_playground/ui/chart/line_chart_sample1.dart';
+import 'package:flutter_app_playground/ui/chart/line_chart_sample2.dart';
 
 class LineChartPage extends StatelessWidget {
   const LineChartPage({Key? key}) : super(key: key);

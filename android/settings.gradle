@@ -6,7 +6,7 @@ pluginManagement {
   }
 }
 
-rootProject.name = "flutter-gradle-app-playground"
+rootProject.name = "flutter-app-playground"
 
 include ':app'
 

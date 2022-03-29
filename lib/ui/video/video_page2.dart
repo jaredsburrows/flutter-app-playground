@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gradle_app_playground/ui/page_info.dart';
+import 'package:flutter_app_playground/ui/page_info.dart';
 import 'package:video_player/video_player.dart';
 
 // https://pub.dev/packages/video_player
