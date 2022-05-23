@@ -1,6 +1,6 @@
 {
-    "name": "Flutter App Playground",
-    "short_name": "Flutter Playground",
+    "name": "flutter_app_playground",
+    "short_name": "flutter_app_playground",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
