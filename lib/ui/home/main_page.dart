@@ -55,12 +55,11 @@ class MainPage extends StatefulWidget {
   ];
 
   @override
-  State<StatefulWidget> createState() {
-    return MainPageState();
-  }
+  State<StatefulWidget> createState() => _MainPageState();
 }
 
-class MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin {
+class _MainPageState extends State<MainPage>
+    with AutomaticKeepAliveClientMixin {
   final GlobalKey<ScaffoldState> _navigatorKey = GlobalKey();
   int _selectedDrawerIndex = 0;
 
@@ -107,11 +106,11 @@ class MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin {
       const Divider(),
     );
     drawerOptions.add(const AboutListTile(
-      child: Text('About'),
       applicationName: 'Flutter Playground',
       applicationVersion: 'v1.0.0',
       applicationIcon: Icon(Icons.adb),
       icon: Icon(Icons.info),
+      child: Text('About'),
     ));
 
     return WillPopScope(

@@ -19,7 +19,7 @@ class SensorsPage extends StatefulWidget implements PageInfo {
   String route() => '/senors-page';
 
   @override
-  _SensorsPageState createState() => _SensorsPageState();
+  State<SensorsPage> createState() => _SensorsPageState();
 }
 
 class _SensorsPageState extends State<SensorsPage> {

@@ -130,19 +130,19 @@ class _QrCameraPageState extends State<QrCameraPage>
                       icon: const Icon(Icons.image),
                       iconSize: 32.0,
                       onPressed: () async {
-                        final ImagePicker _picker = ImagePicker();
+                        final ImagePicker picker = ImagePicker();
                         // Pick an image
-                        final XFile? image = await _picker.pickImage(
-                            source: ImageSource.gallery);
+                        final XFile? image =
+                            await picker.pickImage(source: ImageSource.gallery);
                         if (image != null) {
                           if (await controller.analyzeImage(image.path)) {
-                            ScaffoldMessenger.of(context)
+                            ScaffoldMessenger.of(this.context)
                                 .showSnackBar(const SnackBar(
                               content: Text('Barcode found!'),
                               backgroundColor: Colors.green,
                             ));
                           } else {
-                            ScaffoldMessenger.of(context)
+                            ScaffoldMessenger.of(this.context)
                                 .showSnackBar(const SnackBar(
                               content: Text('No barcode found!'),
                               backgroundColor: Colors.red,

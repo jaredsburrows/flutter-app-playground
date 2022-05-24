@@ -17,7 +17,7 @@ class WidgetInfiniteListviewPage extends StatefulWidget implements PageInfo {
   String route() => '/widget-infinite-listview-page';
 
   @override
-  _WidgetInfiniteListviewPageState createState() =>
+  State<WidgetInfiniteListviewPage> createState() =>
       _WidgetInfiniteListviewPageState();
 }
 

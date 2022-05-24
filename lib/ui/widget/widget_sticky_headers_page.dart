@@ -17,7 +17,7 @@ class WidgetStickyHeadersPage extends StatefulWidget implements PageInfo {
   String route() => '/widget-sticky-headers-page';
 
   @override
-  _WidgetStickyHeadersPageState createState() =>
+  State<WidgetStickyHeadersPage> createState() =>
       _WidgetStickyHeadersPageState();
 }
 
@@ -264,7 +264,7 @@ class Example4 extends StatefulWidget {
   const Example4({Key? key}) : super(key: key);
 
   @override
-  _Example4State createState() => _Example4State();
+  State<Example4> createState() => _Example4State();
 }
 
 class _Example4State extends State<Example4> {

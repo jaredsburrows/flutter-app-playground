@@ -23,7 +23,7 @@ class NetworkInfoPage extends StatefulWidget implements PageInfo {
   String route() => '/network-info-page';
 
   @override
-  _NetworkInfoPageState createState() => _NetworkInfoPageState();
+  State<NetworkInfoPage> createState() => _NetworkInfoPageState();
 }
 
 class _NetworkInfoPageState extends State<NetworkInfoPage> {

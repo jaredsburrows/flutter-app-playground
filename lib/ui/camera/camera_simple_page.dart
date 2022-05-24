@@ -18,7 +18,7 @@ class CameraSimplePage extends StatefulWidget implements PageInfo {
   String route() => '/camera-simple-page';
 
   @override
-  _CameraSimplePageState createState() => _CameraSimplePageState();
+  State<CameraSimplePage> createState() => _CameraSimplePageState();
 }
 
 class _CameraSimplePageState extends State<CameraSimplePage> {

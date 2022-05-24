@@ -25,9 +25,7 @@ class CameraPage extends StatefulWidget implements PageInfo {
   String route() => '/camera-page';
 
   @override
-  _CameraPageState createState() {
-    return _CameraPageState();
-  }
+  State<CameraPage> createState() => _CameraPageState();
 }
 
 IconData getCameraLensIcon(CameraLensDirection direction) {
@@ -146,12 +144,6 @@ class _CameraPageState extends State<CameraPage>
         children: <Widget>[
           Expanded(
             child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(1.0),
-                child: Center(
-                  child: _cameraPreviewWidget(),
-                ),
-              ),
               decoration: BoxDecoration(
                 color: Colors.black,
                 border: Border.all(
@@ -160,6 +152,12 @@ class _CameraPageState extends State<CameraPage>
                           ? Colors.redAccent
                           : Colors.grey,
                   width: 3.0,
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: Center(
+                  child: _cameraPreviewWidget(),
                 ),
               ),
             ),
@@ -245,6 +243,8 @@ class _CameraPageState extends State<CameraPage>
               Container()
             else
               SizedBox(
+                width: 64.0,
+                height: 64.0,
                 child: (localVideoController == null)
                     ? (
                         // The captured image on the web contains a network-accessible URL
@@ -255,17 +255,15 @@ class _CameraPageState extends State<CameraPage>
                             ? Image.network(imageFile!.path)
                             : Image.file(File(imageFile!.path)))
                     : Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.pink)),
                         child: Center(
                           child: AspectRatio(
                               aspectRatio:
                                   localVideoController.value.aspectRatio,
                               child: VideoPlayer(localVideoController)),
                         ),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.pink)),
                       ),
-                width: 64.0,
-                height: 64.0,
               ),
           ],
         ),
@@ -404,7 +402,6 @@ class _CameraPageState extends State<CameraPage>
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   TextButton(
-                    child: const Text('AUTO'),
                     style: styleAuto,
                     onPressed: controller != null
                         ? () =>
@@ -416,21 +413,22 @@ class _CameraPageState extends State<CameraPage>
                         _showInSnackBar('Resetting exposure point');
                       }
                     },
+                    child: const Text('AUTO'),
                   ),
                   TextButton(
-                    child: const Text('LOCKED'),
                     style: styleLocked,
                     onPressed: controller != null
                         ? () =>
                             _onSetExposureModeButtonPressed(ExposureMode.locked)
                         : null,
+                    child: const Text('LOCKED'),
                   ),
                   TextButton(
-                    child: const Text('RESET OFFSET'),
                     style: styleLocked,
                     onPressed: controller != null
                         ? () => controller!.setExposureOffset(0.0)
                         : null,
+                    child: const Text('RESET OFFSET'),
                   ),
                 ],
               ),
@@ -489,7 +487,6 @@ class _CameraPageState extends State<CameraPage>
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   TextButton(
-                    child: const Text('AUTO'),
                     style: styleAuto,
                     onPressed: controller != null
                         ? () => _onSetFocusModeButtonPressed(FocusMode.auto)
@@ -500,13 +497,14 @@ class _CameraPageState extends State<CameraPage>
                       }
                       _showInSnackBar('Resetting focus point');
                     },
+                    child: const Text('AUTO'),
                   ),
                   TextButton(
-                    child: const Text('LOCKED'),
                     style: styleLocked,
                     onPressed: controller != null
                         ? () => _onSetFocusModeButtonPressed(FocusMode.locked)
                         : null,
+                    child: const Text('LOCKED'),
                   ),
                 ],
               ),
@@ -775,7 +773,8 @@ class _CameraPageState extends State<CameraPage>
       if (mounted) {
         setState(() {});
       }
-      _showInSnackBar('Exposure mode set to ${mode.toString().split('.').last}');
+      _showInSnackBar(
+          'Exposure mode set to ${mode.toString().split('.').last}');
     });
   }
 

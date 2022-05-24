@@ -21,7 +21,7 @@ class ConnectivityPage extends StatefulWidget implements PageInfo {
   String route() => '/connectivity-page';
 
   @override
-  _ConnectivityPageState createState() => _ConnectivityPageState();
+  State<ConnectivityPage> createState() => _ConnectivityPageState();
 }
 
 class _ConnectivityPageState extends State<ConnectivityPage> {

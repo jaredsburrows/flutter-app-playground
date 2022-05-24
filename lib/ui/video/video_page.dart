@@ -18,7 +18,7 @@ class VideoPage extends StatefulWidget implements PageInfo {
   String route() => '/video-page';
 
   @override
-  _VideoPageState createState() => _VideoPageState();
+  State<VideoPage> createState() => _VideoPageState();
 }
 
 class _VideoPageState extends State<VideoPage> {

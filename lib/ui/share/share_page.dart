@@ -20,7 +20,7 @@ class SharePage extends StatefulWidget implements PageInfo {
   String route() => '/share-page';
 
   @override
-  _SharePageState createState() => _SharePageState();
+  State<SharePage> createState() => _SharePageState();
 }
 
 class _SharePageState extends State<SharePage> {

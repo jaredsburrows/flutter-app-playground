@@ -20,7 +20,7 @@ class BatteryPage extends StatefulWidget implements PageInfo {
   String route() => '/battery-page';
 
   @override
-  _BatteryPageState createState() => _BatteryPageState();
+  State<BatteryPage> createState() => _BatteryPageState();
 }
 
 class _BatteryPageState extends State<BatteryPage> {

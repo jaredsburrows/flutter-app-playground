@@ -14,14 +14,13 @@ class HomePage extends StatefulWidget implements PageInfo {
   String route() => '/';
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 // TODO: better way to save state
 int _counter = 0;
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

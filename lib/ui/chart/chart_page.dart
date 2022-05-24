@@ -21,7 +21,7 @@ class ChartPage extends StatefulWidget implements PageInfo {
   String route() => '/chart-page';
 
   @override
-  _ChartPageState createState() => _ChartPageState();
+  State<ChartPage> createState() => _ChartPageState();
 }
 
 class _ChartPageState extends State<ChartPage> {

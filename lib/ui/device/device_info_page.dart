@@ -13,7 +13,7 @@ class DeviceInfoPage extends StatefulWidget implements PageInfo {
   const DeviceInfoPage({Key? key}) : super(key: key);
 
   @override
-  String title() =>  'Device Info Page';
+  String title() => 'Device Info Page';
 
   @override
   IconData icon() => Icons.device_unknown;
@@ -22,7 +22,7 @@ class DeviceInfoPage extends StatefulWidget implements PageInfo {
   String route() => '/device-info-page';
 
   @override
-  _DeviceInfoPageState createState() => _DeviceInfoPageState();
+  State<DeviceInfoPage> createState() => _DeviceInfoPageState();
 }
 
 class _DeviceInfoPageState extends State<DeviceInfoPage> {

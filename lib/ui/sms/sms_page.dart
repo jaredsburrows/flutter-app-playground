@@ -17,7 +17,7 @@ class SmsPage extends StatefulWidget implements PageInfo {
   String route() => '/sms-page';
 
   @override
-  _SmsPageState createState() => _SmsPageState();
+  State<SmsPage> createState() => _SmsPageState();
 }
 
 class _SmsPageState extends State<SmsPage> {
@@ -39,19 +39,19 @@ class _SmsPageState extends State<SmsPage> {
 
   Future<void> _sendSMS(List<String> recipients) async {
     try {
-      String _result = await sendSMS(
+      String result = await sendSMS(
           message: _controllerMessage.text, recipients: recipients);
-      setState(() => _message = _result);
+      setState(() => _message = result);
     } catch (error) {
       setState(() => _message = error.toString());
     }
   }
 
   Future<bool> _canSendSMS() async {
-    bool _result = await canSendSMS();
+    bool result = await canSendSMS();
     setState(() => _canSendSMSMessage =
-        _result ? 'This unit can send SMS' : 'This unit cannot send SMS');
-    return _result;
+        result ? 'This unit can send SMS' : 'This unit cannot send SMS');
+    return result;
   }
 
   Widget _phoneTile(String name) {

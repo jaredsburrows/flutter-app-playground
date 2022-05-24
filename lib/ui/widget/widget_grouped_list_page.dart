@@ -17,7 +17,7 @@ class WidgetGroupedListPage extends StatefulWidget implements PageInfo {
   String route() => '/widget-grouped-list-page';
 
   @override
-  _WidgetGroupedListPageState createState() => _WidgetGroupedListPageState();
+  State<WidgetGroupedListPage> createState() => _WidgetGroupedListPageState();
 }
 
 List _elements = [

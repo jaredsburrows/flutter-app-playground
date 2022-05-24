@@ -14,7 +14,7 @@ class ProfilePage extends StatefulWidget implements PageInfo {
   String route() => '/profile-page';
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
@@ -196,8 +196,8 @@ class ButtonWidget extends StatelessWidget {
         onPrimary: Colors.white,
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
       ),
-      child: Text(text),
       onPressed: onClicked,
+      child: Text(text),
     );
   }
 }

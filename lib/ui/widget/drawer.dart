@@ -8,7 +8,7 @@ class AppDrawer extends StatefulWidget {
   const AppDrawer({Key? key}) : super(key: key);
 
   @override
-  _AppDrawerState createState() => _AppDrawerState();
+  State<AppDrawer> createState() => _AppDrawerState();
 }
 
 class _AppDrawerState extends State<AppDrawer> {
@@ -37,11 +37,11 @@ class _AppDrawerState extends State<AppDrawer> {
               }),
           const Divider(),
           const AboutListTile(
-            child: Text('About'),
             applicationName: 'Flutter Playground',
             applicationVersion: 'v1.0.0',
             applicationIcon: Icon(Icons.adb),
             icon: Icon(Icons.info),
+            child: Text('About'),
           )
         ],
       ),
