@@ -38,7 +38,7 @@ jobs:
           sdk: ${{ env.DART_VERSION }}
 
       - name: Configure Flutter
-        uses: subosito/flutter-action@v2.3.0
+        uses: subosito/flutter-action@v2.4.0
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: stable
@@ -86,7 +86,7 @@ jobs:
           sdk: ${{ env.DART_VERSION }}
 
       - name: Configure Flutter
-        uses: subosito/flutter-action@v2.3.0
+        uses: subosito/flutter-action@v2.4.0
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: stable
@@ -133,7 +133,7 @@ jobs:
           sdk: ${{ env.DART_VERSION }}
 
       - name: Configure Flutter
-        uses: subosito/flutter-action@v2.3.0
+        uses: subosito/flutter-action@v2.4.0
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: stable
@@ -178,7 +178,7 @@ jobs:
           sdk: ${{ env.DART_VERSION }}
 
       - name: Configure Flutter
-        uses: subosito/flutter-action@v2.3.0
+        uses: subosito/flutter-action@v2.4.0
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: stable
