@@ -4,6 +4,74 @@
 [![build](https://github.com/jaredsburrows/flutter-app-playground/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/jaredsburrows/flutter-app-playground/actions/workflows/build.yml)
 [![Twitter Follow](https://img.shields.io/twitter/follow/jaredsburrows.svg?style=social)](https://twitter.com/jaredsburrows)
 
+### Updates
+
+**Flutter**
+
+```shell
+flutter upgrade
+flutter pub get
+flutter pub upgrade --null-safety
+```
+
+## Build the Android app
+
+**Debug**
+
+```shell
+flutter build apk --debug
+```
+
+**Release APK**
+
+```shell
+flutter build apk --release --obfuscate --split-debug-info build/app/outputs/symbols-apk/ --target-platform android-arm64
+```
+
+**Release Bundle**
+
+```shell
+flutter build appbundle --release --obfuscate --split-debug-info build/app/outputs/symbols-appbundle --target-platform android-arm64
+```
+
+## Build the iOS app
+
+**Debug**
+
+```shell
+flutter build ios --debug --no-codesign
+```
+
+**Release**
+
+```shell
+flutter build ios --release --obfuscate --split-debug-info build/ios/outputs/symbols
+```
+
+## Build the Web app
+
+**Debug/Release**
+
+```shell
+flutter build web
+```
+
+## Testing
+
+**Run unit tests with coverage**
+
+```shell
+flutter test --coverage
+```
+
+## Reports
+
+**Run analyzer**
+
+```shell
+flutter analyze
+```
+
 ## License
 
 ```

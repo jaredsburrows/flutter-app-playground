@@ -10,13 +10,12 @@ on:
 env:
   REPO_NAME: flutter-app-playground
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx4g -Xms128m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
-  DART_VERSION: 2.16.1
-  FLUTTER_VERSION: 2.10.2
+  FLUTTER_VERSION: 3.0.1
   JAVA_VERSION: 11
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       - name: Checkout Project
@@ -26,22 +25,19 @@ jobs:
         uses: actions/cache@v3.0.2
         with:
           path: |
-            /opt/hostedtoolcache/flutter
-            /home/runner/.pub-cache
+            ~/.gradle/caches
+            ~/.gradle/wrapper/
+            ~/.android/build-cache
+            /Users/runner/hostedtoolcache/flutter
+            /Users/runner/.pub-cache
           key: ${{ runner.os }}-build-${{ env.FLUTTER_VERSION }}
           restore-keys: |
             ${{ runner.os }}-build
-
-      - name: Configure Dart
-        uses: dart-lang/setup-dart@v1.3
-        with:
-          sdk: ${{ env.DART_VERSION }}
 
       - name: Configure Flutter
         uses: subosito/flutter-action@v2.4.0
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
-          channel: stable
           cache: true
 
       - name: Run Analyzer
@@ -49,7 +45,7 @@ jobs:
           flutter analyze
 
   android:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     needs:
       - build
 
@@ -65,10 +61,10 @@ jobs:
         with:
           path: |
             ~/.gradle/caches
-            ~/.gradle/wrapper
+            ~/.gradle/wrapper/
             ~/.android/build-cache
-            /opt/hostedtoolcache/flutter
-            /home/runner/.pub-cache
+            /Users/runner/hostedtoolcache/flutter
+            /Users/runner/.pub-cache
           key: ${{ runner.os }}-android-${{ env.FLUTTER_VERSION }}
           restore-keys: |
             ${{ runner.os }}-android
@@ -80,16 +76,10 @@ jobs:
           distribution: temurin
           cache: gradle
 
-      - name: Configure Dart
-        uses: dart-lang/setup-dart@v1.3
-        with:
-          sdk: ${{ env.DART_VERSION }}
-
       - name: Configure Flutter
         uses: subosito/flutter-action@v2.4.0
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
-          channel: stable
           cache: true
 
       - name: Build Android
@@ -121,22 +111,19 @@ jobs:
         uses: actions/cache@v3.0.2
         with:
           path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper/
+            ~/.android/build-cache
             /Users/runner/hostedtoolcache/flutter
             /Users/runner/.pub-cache
           key: ${{ runner.os }}-ios-${{ env.FLUTTER_VERSION }}
           restore-keys: |
             ${{ runner.os }}-ios
 
-      - name: Configure Dart
-        uses: dart-lang/setup-dart@v1.3
-        with:
-          sdk: ${{ env.DART_VERSION }}
-
       - name: Configure Flutter
         uses: subosito/flutter-action@v2.4.0
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
-          channel: stable
           cache: true
 
       - name: Build iOS
@@ -154,7 +141,7 @@ jobs:
           if-no-files-found: warn
 
   web:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     needs:
       - build
 
@@ -166,22 +153,19 @@ jobs:
         uses: actions/cache@v3.0.2
         with:
           path: |
-            /opt/hostedtoolcache/flutter
-            /home/runner/.pub-cache
+            ~/.gradle/caches
+            ~/.gradle/wrapper/
+            ~/.android/build-cache
+            /Users/runner/hostedtoolcache/flutter
+            /Users/runner/.pub-cache
           key: ${{ runner.os }}-build-${{ env.FLUTTER_VERSION }}
           restore-keys: |
             ${{ runner.os }}-web
-
-      - name: Configure Dart
-        uses: dart-lang/setup-dart@v1.3
-        with:
-          sdk: ${{ env.DART_VERSION }}
 
       - name: Configure Flutter
         uses: subosito/flutter-action@v2.4.0
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
-          channel: stable
           cache: true
 
       - name: Build Website
@@ -198,7 +182,7 @@ jobs:
           if-no-files-found: warn
 
   publish:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     if: github.ref == 'refs/heads/main'
     needs:
       - build
