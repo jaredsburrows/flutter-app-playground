@@ -10,12 +10,17 @@ on:
 env:
   REPO_NAME: flutter-app-playground
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx4g -Xms128m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
-  FLUTTER_VERSION: 3.0.1
-  JAVA_VERSION: 11
 
 jobs:
   build:
+    name: JDK ${{ matrix.java-version }}
     runs-on: macos-latest
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version:
+          - 11
 
     steps:
       - name: Checkout Project
@@ -30,14 +35,14 @@ jobs:
             ~/.android/build-cache
             /Users/runner/hostedtoolcache/flutter
             /Users/runner/.pub-cache
-          key: ${{ runner.os }}-build-${{ env.FLUTTER_VERSION }}
+          key: ${{ runner.os }}-build
           restore-keys: |
             ${{ runner.os }}-build
 
       - name: Configure Flutter
         uses: subosito/flutter-action@v2.4.0
         with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
           cache: true
 
       - name: Run Analyzer
@@ -65,21 +70,21 @@ jobs:
             ~/.android/build-cache
             /Users/runner/hostedtoolcache/flutter
             /Users/runner/.pub-cache
-          key: ${{ runner.os }}-android-${{ env.FLUTTER_VERSION }}
+          key: ${{ runner.os }}-android
           restore-keys: |
             ${{ runner.os }}-android
 
-      - name: Configure JDK
+      - name: Configure JDK ${{ matrix.java-version }}
         uses: actions/setup-java@v3.3.0
         with:
-          java-version: ${{ env.JAVA_VERSION }}
+          java-version: ${{ matrix.java-version }}
           distribution: temurin
           cache: gradle
 
       - name: Configure Flutter
         uses: subosito/flutter-action@v2.4.0
         with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
           cache: true
 
       - name: Build Android
@@ -116,14 +121,14 @@ jobs:
             ~/.android/build-cache
             /Users/runner/hostedtoolcache/flutter
             /Users/runner/.pub-cache
-          key: ${{ runner.os }}-ios-${{ env.FLUTTER_VERSION }}
+          key: ${{ runner.os }}-ios
           restore-keys: |
             ${{ runner.os }}-ios
 
       - name: Configure Flutter
         uses: subosito/flutter-action@v2.4.0
         with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
           cache: true
 
       - name: Build iOS
@@ -158,14 +163,14 @@ jobs:
             ~/.android/build-cache
             /Users/runner/hostedtoolcache/flutter
             /Users/runner/.pub-cache
-          key: ${{ runner.os }}-build-${{ env.FLUTTER_VERSION }}
+          key: ${{ runner.os }}-build
           restore-keys: |
             ${{ runner.os }}-web
 
       - name: Configure Flutter
         uses: subosito/flutter-action@v2.4.0
         with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
           cache: true
 
       - name: Build Website
