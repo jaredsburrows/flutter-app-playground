@@ -33,7 +33,7 @@ jobs:
             ${{ runner.os }}-build
 
       - name: Configure Flutter
-        uses: subosito/flutter-action@v2.6.2
+        uses: subosito/flutter-action@v2.7.0
         with:
           channel: stable
           cache: true
@@ -75,7 +75,7 @@ jobs:
           cache: gradle
 
       - name: Configure Flutter
-        uses: subosito/flutter-action@v2.6.2
+        uses: subosito/flutter-action@v2.7.0
         with:
           channel: stable
           cache: true
@@ -119,7 +119,7 @@ jobs:
             ${{ runner.os }}-ios
 
       - name: Configure Flutter
-        uses: subosito/flutter-action@v2.6.2
+        uses: subosito/flutter-action@v2.7.0
         with:
           channel: stable
           cache: true
@@ -161,7 +161,7 @@ jobs:
             ${{ runner.os }}-web
 
       - name: Configure Flutter
-        uses: subosito/flutter-action@v2.6.2
+        uses: subosito/flutter-action@v2.7.0
         with:
           channel: stable
           cache: true
