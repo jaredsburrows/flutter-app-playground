@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.3.0
 
       - name: Cache Dependencies
         uses: actions/cache@v3.0.8
@@ -49,7 +49,7 @@ jobs:
 
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.3.0
 
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1.0.4
@@ -103,7 +103,7 @@ jobs:
 
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.3.0
 
       - name: Cache Dependencies
         uses: actions/cache@v3.0.8
@@ -145,7 +145,7 @@ jobs:
 
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.3.0
 
       - name: Cache Dependencies
         uses: actions/cache@v3.0.8
