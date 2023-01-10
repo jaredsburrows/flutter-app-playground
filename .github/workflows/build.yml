@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v3.0.2
 
       - name: Cache Dependencies
-        uses: actions/cache@v3.0.8
+        uses: actions/cache@v3.2.3
         with:
           path: |
             ~/.gradle/caches
@@ -55,7 +55,7 @@ jobs:
         uses: gradle/wrapper-validation-action@v1.0.4
 
       - name: Cache Dependencies
-        uses: actions/cache@v3.0.8
+        uses: actions/cache@v3.2.3
         with:
           path: |
             ~/.gradle/caches
@@ -106,7 +106,7 @@ jobs:
         uses: actions/checkout@v3.0.2
 
       - name: Cache Dependencies
-        uses: actions/cache@v3.0.8
+        uses: actions/cache@v3.2.3
         with:
           path: |
             ~/.gradle/caches
@@ -148,7 +148,7 @@ jobs:
         uses: actions/checkout@v3.0.2
 
       - name: Cache Dependencies
-        uses: actions/cache@v3.0.8
+        uses: actions/cache@v3.2.3
         with:
           path: |
             ~/.gradle/caches
