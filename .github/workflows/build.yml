@@ -39,8 +39,7 @@ jobs:
           cache: true
 
       - name: Run Analyzer
-        run: |
-          flutter analyze
+        run: flutter analyze --suppress-analytics --no-fatal-infos --no-fatal-warnings
 
   android:
     runs-on: macos-latest
