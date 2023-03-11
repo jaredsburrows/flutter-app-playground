@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_app_playground/main.dart';
 import 'package:flutter_app_playground/ui/page_info.dart';
 import 'package:video_player/video_player.dart';
@@ -28,6 +29,7 @@ class CameraPage extends StatefulWidget implements PageInfo {
   State<CameraPage> createState() => _CameraPageState();
 }
 
+/// Returns a suitable camera icon for [direction].
 IconData getCameraLensIcon(CameraLensDirection direction) {
   switch (direction) {
     case CameraLensDirection.back:
@@ -36,9 +38,16 @@ IconData getCameraLensIcon(CameraLensDirection direction) {
       return Icons.camera_front;
     case CameraLensDirection.external:
       return Icons.camera;
-    default:
-      throw ArgumentError('Unknown lens direction');
   }
+  // This enum is from a different package, so a new value could be added at
+  // any time. The example should keep working if that happens.
+  // ignore: dead_code
+  return Icons.camera;
+}
+
+void _logError(String code, String? message) {
+  // ignore: avoid_print
+  print('Error: $code${message == null ? '' : '\nError Message: $message'}');
 }
 
 class _CameraPageState extends State<CameraPage>
@@ -66,23 +75,10 @@ class _CameraPageState extends State<CameraPage>
   // Counting pointers (number of user fingers on screen)
   int _pointers = 0;
 
-  // Future<void> _availableCameras() async {
-  //   // Fetch the available cameras before initializing the app.
-  //   try {
-  //     WidgetsFlutterBinding.ensureInitialized();
-  //     cameras = await availableCameras();
-  //   } on CameraException catch (e) {
-  //     logError(e.code, e.description);
-  //   }
-  // }
-
   @override
   void initState() {
     super.initState();
-
-    // _availableCameras();
-
-    _ambiguate(WidgetsBinding.instance)?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
 
     _flashModeControlRowAnimationController = AnimationController(
       duration: const Duration(milliseconds: 300),
@@ -112,12 +108,13 @@ class _CameraPageState extends State<CameraPage>
 
   @override
   void dispose() {
-    _ambiguate(WidgetsBinding.instance)?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     _flashModeControlRowAnimationController.dispose();
     _exposureModeControlRowAnimationController.dispose();
     super.dispose();
   }
 
+  // #docregion AppLifecycle
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     final CameraController? cameraController = controller;
@@ -130,16 +127,18 @@ class _CameraPageState extends State<CameraPage>
     if (state == AppLifecycleState.inactive) {
       cameraController.dispose();
     } else if (state == AppLifecycleState.resumed) {
-      _onNewCameraSelected(cameraController.description);
+      onNewCameraSelected(cameraController.description);
     }
   }
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  // #enddocregion AppLifecycle
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
+      appBar: AppBar(
+        title: const Text('Camera example'),
+      ),
       body: Column(
         children: <Widget>[
           Expanded(
@@ -167,7 +166,6 @@ class _CameraPageState extends State<CameraPage>
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 _cameraTogglesRowWidget(),
                 _thumbnailWidget(),
@@ -205,7 +203,7 @@ class _CameraPageState extends State<CameraPage>
               onScaleStart: _handleScaleStart,
               onScaleUpdate: _handleScaleUpdate,
               onTapDown: (TapDownDetails details) =>
-                  _onViewFinderTap(details, constraints),
+                  onViewFinderTap(details, constraints),
             );
           }),
         ),
@@ -260,7 +258,9 @@ class _CameraPageState extends State<CameraPage>
                         child: Center(
                           child: AspectRatio(
                               aspectRatio:
-                                  localVideoController.value.aspectRatio,
+                                  localVideoController.value.size != null
+                                      ? localVideoController.value.aspectRatio
+                                      : 1.0,
                               child: VideoPlayer(localVideoController)),
                         ),
                       ),
@@ -277,12 +277,11 @@ class _CameraPageState extends State<CameraPage>
       children: <Widget>[
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             IconButton(
               icon: const Icon(Icons.flash_on),
               color: Colors.blue,
-              onPressed: controller != null ? _onFlashModeButtonPressed : null,
+              onPressed: controller != null ? onFlashModeButtonPressed : null,
             ),
             // The exposure and focus mode are currently not supported on the web.
             ...!kIsWeb
@@ -291,21 +290,21 @@ class _CameraPageState extends State<CameraPage>
                       icon: const Icon(Icons.exposure),
                       color: Colors.blue,
                       onPressed: controller != null
-                          ? _onExposureModeButtonPressed
+                          ? onExposureModeButtonPressed
                           : null,
                     ),
                     IconButton(
                       icon: const Icon(Icons.filter_center_focus),
                       color: Colors.blue,
                       onPressed:
-                          controller != null ? _onFocusModeButtonPressed : null,
+                          controller != null ? onFocusModeButtonPressed : null,
                     )
                   ]
                 : <Widget>[],
             IconButton(
               icon: Icon(enableAudio ? Icons.volume_up : Icons.volume_mute),
               color: Colors.blue,
-              onPressed: controller != null ? _onAudioModeButtonPressed : null,
+              onPressed: controller != null ? onAudioModeButtonPressed : null,
             ),
             IconButton(
               icon: Icon(controller?.value.isCaptureOrientationLocked ?? false
@@ -313,7 +312,7 @@ class _CameraPageState extends State<CameraPage>
                   : Icons.screen_rotation),
               color: Colors.blue,
               onPressed: controller != null
-                  ? _onCaptureOrientationLockButtonPressed
+                  ? onCaptureOrientationLockButtonPressed
                   : null,
             ),
           ],
@@ -331,7 +330,6 @@ class _CameraPageState extends State<CameraPage>
       child: ClipRect(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             IconButton(
               icon: const Icon(Icons.flash_off),
@@ -339,7 +337,7 @@ class _CameraPageState extends State<CameraPage>
                   ? Colors.orange
                   : Colors.blue,
               onPressed: controller != null
-                  ? () => _onSetFlashModeButtonPressed(FlashMode.off)
+                  ? () => onSetFlashModeButtonPressed(FlashMode.off)
                   : null,
             ),
             IconButton(
@@ -348,7 +346,7 @@ class _CameraPageState extends State<CameraPage>
                   ? Colors.orange
                   : Colors.blue,
               onPressed: controller != null
-                  ? () => _onSetFlashModeButtonPressed(FlashMode.auto)
+                  ? () => onSetFlashModeButtonPressed(FlashMode.auto)
                   : null,
             ),
             IconButton(
@@ -357,7 +355,7 @@ class _CameraPageState extends State<CameraPage>
                   ? Colors.orange
                   : Colors.blue,
               onPressed: controller != null
-                  ? () => _onSetFlashModeButtonPressed(FlashMode.always)
+                  ? () => onSetFlashModeButtonPressed(FlashMode.always)
                   : null,
             ),
             IconButton(
@@ -366,7 +364,7 @@ class _CameraPageState extends State<CameraPage>
                   ? Colors.orange
                   : Colors.blue,
               onPressed: controller != null
-                  ? () => _onSetFlashModeButtonPressed(FlashMode.torch)
+                  ? () => onSetFlashModeButtonPressed(FlashMode.torch)
                   : null,
             ),
           ],
@@ -377,11 +375,15 @@ class _CameraPageState extends State<CameraPage>
 
   Widget _exposureModeControlRowWidget() {
     final ButtonStyle styleAuto = TextButton.styleFrom(
+      // TODO(darrenaustin): Migrate to new API once it lands in stable: https://github.com/flutter/flutter/issues/105724
+      // ignore: deprecated_member_use
       primary: controller?.value.exposureMode == ExposureMode.auto
           ? Colors.orange
           : Colors.blue,
     );
     final ButtonStyle styleLocked = TextButton.styleFrom(
+      // TODO(darrenaustin): Migrate to new API once it lands in stable: https://github.com/flutter/flutter/issues/105724
+      // ignore: deprecated_member_use
       primary: controller?.value.exposureMode == ExposureMode.locked
           ? Colors.orange
           : Colors.blue,
@@ -399,18 +401,17 @@ class _CameraPageState extends State<CameraPage>
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   TextButton(
                     style: styleAuto,
                     onPressed: controller != null
                         ? () =>
-                            _onSetExposureModeButtonPressed(ExposureMode.auto)
+                            onSetExposureModeButtonPressed(ExposureMode.auto)
                         : null,
                     onLongPress: () {
                       if (controller != null) {
                         controller!.setExposurePoint(null);
-                        _showInSnackBar('Resetting exposure point');
+                        showInSnackBar('Resetting exposure point');
                       }
                     },
                     child: const Text('AUTO'),
@@ -419,7 +420,7 @@ class _CameraPageState extends State<CameraPage>
                     style: styleLocked,
                     onPressed: controller != null
                         ? () =>
-                            _onSetExposureModeButtonPressed(ExposureMode.locked)
+                            onSetExposureModeButtonPressed(ExposureMode.locked)
                         : null,
                     child: const Text('LOCKED'),
                   ),
@@ -437,7 +438,6 @@ class _CameraPageState extends State<CameraPage>
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   Text(_minAvailableExposureOffset.toString()),
                   Slider(
@@ -448,7 +448,7 @@ class _CameraPageState extends State<CameraPage>
                     onChanged: _minAvailableExposureOffset ==
                             _maxAvailableExposureOffset
                         ? null
-                        : _setExposureOffset,
+                        : setExposureOffset,
                   ),
                   Text(_maxAvailableExposureOffset.toString()),
                 ],
@@ -462,11 +462,15 @@ class _CameraPageState extends State<CameraPage>
 
   Widget _focusModeControlRowWidget() {
     final ButtonStyle styleAuto = TextButton.styleFrom(
+      // TODO(darrenaustin): Migrate to new API once it lands in stable: https://github.com/flutter/flutter/issues/105724
+      // ignore: deprecated_member_use
       primary: controller?.value.focusMode == FocusMode.auto
           ? Colors.orange
           : Colors.blue,
     );
     final ButtonStyle styleLocked = TextButton.styleFrom(
+      // TODO(darrenaustin): Migrate to new API once it lands in stable: https://github.com/flutter/flutter/issues/105724
+      // ignore: deprecated_member_use
       primary: controller?.value.focusMode == FocusMode.locked
           ? Colors.orange
           : Colors.blue,
@@ -484,25 +488,24 @@ class _CameraPageState extends State<CameraPage>
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   TextButton(
                     style: styleAuto,
                     onPressed: controller != null
-                        ? () => _onSetFocusModeButtonPressed(FocusMode.auto)
+                        ? () => onSetFocusModeButtonPressed(FocusMode.auto)
                         : null,
                     onLongPress: () {
                       if (controller != null) {
                         controller!.setFocusPoint(null);
                       }
-                      _showInSnackBar('Resetting focus point');
+                      showInSnackBar('Resetting focus point');
                     },
                     child: const Text('AUTO'),
                   ),
                   TextButton(
                     style: styleLocked,
                     onPressed: controller != null
-                        ? () => _onSetFocusModeButtonPressed(FocusMode.locked)
+                        ? () => onSetFocusModeButtonPressed(FocusMode.locked)
                         : null,
                     child: const Text('LOCKED'),
                   ),
@@ -521,7 +524,6 @@ class _CameraPageState extends State<CameraPage>
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         IconButton(
           icon: const Icon(Icons.camera_alt),
@@ -529,7 +531,7 @@ class _CameraPageState extends State<CameraPage>
           onPressed: cameraController != null &&
                   cameraController.value.isInitialized &&
                   !cameraController.value.isRecordingVideo
-              ? _onTakePictureButtonPressed
+              ? onTakePictureButtonPressed
               : null,
         ),
         IconButton(
@@ -538,7 +540,7 @@ class _CameraPageState extends State<CameraPage>
           onPressed: cameraController != null &&
                   cameraController.value.isInitialized &&
                   !cameraController.value.isRecordingVideo
-              ? _onVideoRecordButtonPressed
+              ? onVideoRecordButtonPressed
               : null,
         ),
         IconButton(
@@ -551,8 +553,8 @@ class _CameraPageState extends State<CameraPage>
                   cameraController.value.isInitialized &&
                   cameraController.value.isRecordingVideo
               ? (cameraController.value.isRecordingPaused)
-                  ? _onResumeButtonPressed
-                  : _onPauseButtonPressed
+                  ? onResumeButtonPressed
+                  : onPauseButtonPressed
               : null,
         ),
         IconButton(
@@ -561,7 +563,7 @@ class _CameraPageState extends State<CameraPage>
           onPressed: cameraController != null &&
                   cameraController.value.isInitialized &&
                   cameraController.value.isRecordingVideo
-              ? _onStopButtonPressed
+              ? onStopButtonPressed
               : null,
         ),
         IconButton(
@@ -571,7 +573,7 @@ class _CameraPageState extends State<CameraPage>
                   ? Colors.red
                   : Colors.blue,
           onPressed:
-              cameraController == null ? null : _onPausePreviewButtonPressed,
+              cameraController == null ? null : onPausePreviewButtonPressed,
         ),
       ],
     );
@@ -581,18 +583,19 @@ class _CameraPageState extends State<CameraPage>
   Widget _cameraTogglesRowWidget() {
     final List<Widget> toggles = <Widget>[];
 
-    // ignore: prefer_function_declarations_over_variables
-    final Null Function(CameraDescription? description) onChanged =
-        (CameraDescription? description) {
+    void onChanged(CameraDescription? description) {
       if (description == null) {
         return;
       }
 
-      _onNewCameraSelected(description);
-    };
+      onNewCameraSelected(description);
+    }
 
     if (cameras.isEmpty) {
-      return const Text('No camera found');
+      SchedulerBinding.instance.addPostFrameCallback((_) async {
+        showInSnackBar('No camera found.');
+      });
+      return const Text('None');
     } else {
       for (final CameraDescription cameraDescription in cameras) {
         toggles.add(
@@ -615,12 +618,14 @@ class _CameraPageState extends State<CameraPage>
     return Row(children: toggles);
   }
 
-  void _showInSnackBar(String message) {
-    // ignore: deprecated_member_use
-    _scaffoldKey.currentState?.showSnackBar(SnackBar(content: Text(message)));
+  String timestamp() => DateTime.now().millisecondsSinceEpoch.toString();
+
+  void showInSnackBar(String message) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
   }
 
-  void _onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
+  void onViewFinderTap(TapDownDetails details, BoxConstraints constraints) {
     if (controller == null) {
       return;
     }
@@ -635,9 +640,16 @@ class _CameraPageState extends State<CameraPage>
     cameraController.setFocusPoint(offset);
   }
 
-  Future<void> _onNewCameraSelected(CameraDescription cameraDescription) async {
-    if (controller != null) {
-      await controller!.dispose();
+  Future<void> onNewCameraSelected(CameraDescription cameraDescription) async {
+    final CameraController? oldController = controller;
+    if (oldController != null) {
+      // `controller` needs to be set to null before getting disposed,
+      // to avoid a race condition when we use the controller that is being
+      // disposed. This happens when camera permission dialog shows up,
+      // which triggers `didChangeAppLifecycleState`, which disposes and
+      // re-creates the controller.
+      controller = null;
+      await oldController.dispose();
     }
 
     final CameraController cameraController = CameraController(
@@ -655,7 +667,7 @@ class _CameraPageState extends State<CameraPage>
         setState(() {});
       }
       if (cameraController.value.hasError) {
-        _showInSnackBar(
+        showInSnackBar(
             'Camera error ${cameraController.value.errorDescription}');
       }
     });
@@ -681,7 +693,33 @@ class _CameraPageState extends State<CameraPage>
             .then((double value) => _minAvailableZoom = value),
       ]);
     } on CameraException catch (e) {
-      _showCameraException(e);
+      switch (e.code) {
+        case 'CameraAccessDenied':
+          showInSnackBar('You have denied camera access.');
+          break;
+        case 'CameraAccessDeniedWithoutPrompt':
+          // iOS only
+          showInSnackBar('Please go to Settings app to enable camera access.');
+          break;
+        case 'CameraAccessRestricted':
+          // iOS only
+          showInSnackBar('Camera access is restricted.');
+          break;
+        case 'AudioAccessDenied':
+          showInSnackBar('You have denied audio access.');
+          break;
+        case 'AudioAccessDeniedWithoutPrompt':
+          // iOS only
+          showInSnackBar('Please go to Settings app to enable audio access.');
+          break;
+        case 'AudioAccessRestricted':
+          // iOS only
+          showInSnackBar('Audio access is restricted.');
+          break;
+        default:
+          _showCameraException(e);
+          break;
+      }
     }
 
     if (mounted) {
@@ -689,7 +727,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  void _onTakePictureButtonPressed() {
+  void onTakePictureButtonPressed() {
     takePicture().then((XFile? file) {
       if (mounted) {
         setState(() {
@@ -698,13 +736,13 @@ class _CameraPageState extends State<CameraPage>
           videoController = null;
         });
         if (file != null) {
-          _showInSnackBar('Picture saved to ${file.path}');
+          showInSnackBar('Picture saved to ${file.path}');
         }
       }
     });
   }
 
-  void _onFlashModeButtonPressed() {
+  void onFlashModeButtonPressed() {
     if (_flashModeControlRowAnimationController.value == 1) {
       _flashModeControlRowAnimationController.reverse();
     } else {
@@ -714,7 +752,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  void _onExposureModeButtonPressed() {
+  void onExposureModeButtonPressed() {
     if (_exposureModeControlRowAnimationController.value == 1) {
       _exposureModeControlRowAnimationController.reverse();
     } else {
@@ -724,7 +762,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  void _onFocusModeButtonPressed() {
+  void onFocusModeButtonPressed() {
     if (_focusModeControlRowAnimationController.value == 1) {
       _focusModeControlRowAnimationController.reverse();
     } else {
@@ -734,23 +772,23 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  void _onAudioModeButtonPressed() {
+  void onAudioModeButtonPressed() {
     enableAudio = !enableAudio;
     if (controller != null) {
-      _onNewCameraSelected(controller!.description);
+      onNewCameraSelected(controller!.description);
     }
   }
 
-  Future<void> _onCaptureOrientationLockButtonPressed() async {
+  Future<void> onCaptureOrientationLockButtonPressed() async {
     try {
       if (controller != null) {
         final CameraController cameraController = controller!;
         if (cameraController.value.isCaptureOrientationLocked) {
           await cameraController.unlockCaptureOrientation();
-          _showInSnackBar('Capture orientation unlocked');
+          showInSnackBar('Capture orientation unlocked');
         } else {
           await cameraController.lockCaptureOrientation();
-          _showInSnackBar(
+          showInSnackBar(
               'Capture orientation locked to ${cameraController.value.lockedCaptureOrientation.toString().split('.').last}');
         }
       }
@@ -759,60 +797,59 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  void _onSetFlashModeButtonPressed(FlashMode mode) {
-    _setFlashMode(mode).then((_) {
+  void onSetFlashModeButtonPressed(FlashMode mode) {
+    setFlashMode(mode).then((_) {
       if (mounted) {
         setState(() {});
       }
-      _showInSnackBar('Flash mode set to ${mode.toString().split('.').last}');
+      showInSnackBar('Flash mode set to ${mode.toString().split('.').last}');
     });
   }
 
-  void _onSetExposureModeButtonPressed(ExposureMode mode) {
-    _setExposureMode(mode).then((_) {
+  void onSetExposureModeButtonPressed(ExposureMode mode) {
+    setExposureMode(mode).then((_) {
       if (mounted) {
         setState(() {});
       }
-      _showInSnackBar(
-          'Exposure mode set to ${mode.toString().split('.').last}');
+      showInSnackBar('Exposure mode set to ${mode.toString().split('.').last}');
     });
   }
 
-  void _onSetFocusModeButtonPressed(FocusMode mode) {
-    _setFocusMode(mode).then((_) {
+  void onSetFocusModeButtonPressed(FocusMode mode) {
+    setFocusMode(mode).then((_) {
       if (mounted) {
         setState(() {});
       }
-      _showInSnackBar('Focus mode set to ${mode.toString().split('.').last}');
+      showInSnackBar('Focus mode set to ${mode.toString().split('.').last}');
     });
   }
 
-  void _onVideoRecordButtonPressed() {
-    _startVideoRecording().then((_) {
+  void onVideoRecordButtonPressed() {
+    startVideoRecording().then((_) {
       if (mounted) {
         setState(() {});
       }
     });
   }
 
-  void _onStopButtonPressed() {
-    _stopVideoRecording().then((XFile? file) {
+  void onStopButtonPressed() {
+    stopVideoRecording().then((XFile? file) {
       if (mounted) {
         setState(() {});
       }
       if (file != null) {
-        _showInSnackBar('Video recorded to ${file.path}');
+        showInSnackBar('Video recorded to ${file.path}');
         videoFile = file;
         _startVideoPlayer();
       }
     });
   }
 
-  Future<void> _onPausePreviewButtonPressed() async {
+  Future<void> onPausePreviewButtonPressed() async {
     final CameraController? cameraController = controller;
 
     if (cameraController == null || !cameraController.value.isInitialized) {
-      _showInSnackBar('Error: select a camera first.');
+      showInSnackBar('Error: select a camera first.');
       return;
     }
 
@@ -827,29 +864,29 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  void _onPauseButtonPressed() {
-    _pauseVideoRecording().then((_) {
+  void onPauseButtonPressed() {
+    pauseVideoRecording().then((_) {
       if (mounted) {
         setState(() {});
       }
-      _showInSnackBar('Video recording paused');
+      showInSnackBar('Video recording paused');
     });
   }
 
-  void _onResumeButtonPressed() {
-    _resumeVideoRecording().then((_) {
+  void onResumeButtonPressed() {
+    resumeVideoRecording().then((_) {
       if (mounted) {
         setState(() {});
       }
-      _showInSnackBar('Video recording resumed');
+      showInSnackBar('Video recording resumed');
     });
   }
 
-  Future<void> _startVideoRecording() async {
+  Future<void> startVideoRecording() async {
     final CameraController? cameraController = controller;
 
     if (cameraController == null || !cameraController.value.isInitialized) {
-      _showInSnackBar('Error: select a camera first.');
+      showInSnackBar('Error: select a camera first.');
       return;
     }
 
@@ -866,7 +903,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  Future<XFile?> _stopVideoRecording() async {
+  Future<XFile?> stopVideoRecording() async {
     final CameraController? cameraController = controller;
 
     if (cameraController == null || !cameraController.value.isRecordingVideo) {
@@ -881,7 +918,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  Future<void> _pauseVideoRecording() async {
+  Future<void> pauseVideoRecording() async {
     final CameraController? cameraController = controller;
 
     if (cameraController == null || !cameraController.value.isRecordingVideo) {
@@ -896,7 +933,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  Future<void> _resumeVideoRecording() async {
+  Future<void> resumeVideoRecording() async {
     final CameraController? cameraController = controller;
 
     if (cameraController == null || !cameraController.value.isRecordingVideo) {
@@ -911,7 +948,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  Future<void> _setFlashMode(FlashMode mode) async {
+  Future<void> setFlashMode(FlashMode mode) async {
     if (controller == null) {
       return;
     }
@@ -924,7 +961,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  Future<void> _setExposureMode(ExposureMode mode) async {
+  Future<void> setExposureMode(ExposureMode mode) async {
     if (controller == null) {
       return;
     }
@@ -937,7 +974,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  Future<void> _setExposureOffset(double offset) async {
+  Future<void> setExposureOffset(double offset) async {
     if (controller == null) {
       return;
     }
@@ -953,7 +990,7 @@ class _CameraPageState extends State<CameraPage>
     }
   }
 
-  Future<void> _setFocusMode(FocusMode mode) async {
+  Future<void> setFocusMode(FocusMode mode) async {
     if (controller == null) {
       return;
     }
@@ -976,7 +1013,7 @@ class _CameraPageState extends State<CameraPage>
         : VideoPlayerController.file(File(videoFile!.path));
 
     videoPlayerListener = () {
-      if (videoController != null) {
+      if (videoController != null && videoController!.value.size != null) {
         // Refreshing the state to update video player with the correct ratio.
         if (mounted) {
           setState(() {});
@@ -1000,7 +1037,7 @@ class _CameraPageState extends State<CameraPage>
   Future<XFile?> takePicture() async {
     final CameraController? cameraController = controller;
     if (cameraController == null || !cameraController.value.isInitialized) {
-      _showInSnackBar('Error: select a camera first.');
+      showInSnackBar('Error: select a camera first.');
       return null;
     }
 
@@ -1019,7 +1056,8 @@ class _CameraPageState extends State<CameraPage>
   }
 
   void _showCameraException(CameraException e) {
-    _showInSnackBar('Error: ${e.code}\n${e.description}');
+    _logError(e.code, e.description);
+    showInSnackBar('Error: ${e.code}\n${e.description}');
   }
 }
 
