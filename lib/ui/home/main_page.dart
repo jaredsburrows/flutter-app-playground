@@ -13,7 +13,6 @@ import 'package:flutter_app_playground/ui/page_info.dart';
 import 'package:flutter_app_playground/ui/profile/profile_page.dart';
 import 'package:flutter_app_playground/ui/qr_camera/qr_camera_page.dart';
 import 'package:flutter_app_playground/ui/qr_camera/qr_camera_page2.dart';
-import 'package:flutter_app_playground/ui/qr_camera/qr_camera_page3.dart';
 import 'package:flutter_app_playground/ui/qr_generator/qr_generator_page.dart';
 import 'package:flutter_app_playground/ui/sensors_page/sensors_page.dart';
 import 'package:flutter_app_playground/ui/share/share_page.dart';
@@ -42,7 +41,6 @@ class MainPage extends StatefulWidget {
     ProfilePage(),
     QrCameraPage(),
     QrCameraPage2(),
-    QrCameraPage3(),
     QrGeneratorPage(),
     SensorsPage(),
     SharePage(),

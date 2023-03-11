@@ -48,9 +48,9 @@ class _QrCameraPageState extends State<QrCameraPage>
                 //   torchEnabled: true,
                 //   facing: CameraFacing.front,
                 // ),
-                onDetect: (barcode, args) {
+                onDetect: (barcodes) {
                   setState(() {
-                    _barcode = barcode.rawValue;
+                    _barcode = barcodes.barcodes[0].rawValue;
                   });
                 }),
             Align(
@@ -68,7 +68,7 @@ class _QrCameraPageState extends State<QrCameraPage>
                       icon: ValueListenableBuilder(
                         valueListenable: controller.torchState,
                         builder: (context, state, child) {
-                          switch (state as TorchState) {
+                          switch (state) {
                             case TorchState.off:
                               return const Icon(Icons.flash_off,
                                   color: Colors.grey);
@@ -103,7 +103,7 @@ class _QrCameraPageState extends State<QrCameraPage>
                             overflow: TextOverflow.fade,
                             style: Theme.of(context)
                                 .textTheme
-                                .headline4!
+                                .headlineMedium!
                                 .copyWith(color: Colors.white),
                           ),
                         ),
@@ -114,7 +114,7 @@ class _QrCameraPageState extends State<QrCameraPage>
                       icon: ValueListenableBuilder(
                         valueListenable: controller.cameraFacingState,
                         builder: (context, state, child) {
-                          switch (state as CameraFacing) {
+                          switch (state) {
                             case CameraFacing.front:
                               return const Icon(Icons.camera_front);
                             case CameraFacing.back:
