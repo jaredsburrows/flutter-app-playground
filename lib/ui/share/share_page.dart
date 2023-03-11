@@ -106,7 +106,7 @@ class _SharePageState extends State<SharePage> {
     // surrounding the ElevatedButton.
     //
     // The context's `findRenderObject` returns the first
-    // RenderObject in its descendent tree when it's not
+    // RenderObject in its descendant tree when it's not
     // a RenderObjectWidget. The ElevatedButton's RenderObject
     // has its position and size after it's built.
     final box = context.findRenderObject() as RenderBox?;
