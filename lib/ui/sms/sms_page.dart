@@ -165,7 +165,7 @@ class _SmsPageState extends State<SmsPage> {
                 _send();
               },
               child: Text('SEND',
-                  style: Theme.of(context).textTheme.headline1?.copyWith(
+                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
                         color: Theme.of(context).colorScheme.onSecondary,
                       )),
             ),
