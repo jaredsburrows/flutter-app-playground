@@ -67,7 +67,7 @@ jobs:
             ${{ runner.os }}-android
 
       - name: Configure JDK
-        uses: actions/setup-java@v3.4.1
+        uses: actions/setup-java@v3.10.0
         with:
           java-version: 19
           distribution: temurin
