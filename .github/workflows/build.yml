@@ -73,6 +73,9 @@ jobs:
           distribution: temurin
           cache: gradle
 
+      - name: Run Build
+        uses: gradle/gradle-build-action@v2
+
       - name: Configure Flutter
         uses: subosito/flutter-action@v2.8.0
         with:
@@ -85,7 +88,7 @@ jobs:
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3.1.2
-        if: always()
+        if: github.repository == 'jaredsburrows/flutter-app-playground' && github.ref == 'refs/heads/main'
         with:
           name: ${{ env.REPO_NAME }}-android-${{ github.run_id }}
           path: |
@@ -93,7 +96,6 @@ jobs:
             build/app/outputs/bundle/release
             build/app/outputs/symbols-apk
             build/app/outputs/symbols-appbundle
-          if-no-files-found: warn
 
   ios:
     runs-on: macos-latest
@@ -129,13 +131,12 @@ jobs:
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3.1.2
-        if: always()
+        if: github.repository == 'jaredsburrows/flutter-app-playground' && github.ref == 'refs/heads/main'
         with:
           name: ${{ env.REPO_NAME }}-ios-${{ github.run_id }}
           path: |
             build/ios/Release-iphoneos
             build/ios/symbols
-          if-no-files-found: warn
 
   web:
     runs-on: macos-latest
@@ -171,16 +172,15 @@ jobs:
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3.1.2
-        if: always()
+        if: github.repository == 'jaredsburrows/flutter-app-playground' && github.ref == 'refs/heads/main'
         with:
           name: ${{ env.REPO_NAME }}-web-${{ github.run_id }}
           path: |
             build/web
-          if-no-files-found: warn
 
   publish:
     runs-on: macos-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.repository == 'jaredsburrows/flutter-app-playground' && github.ref == 'refs/heads/main'
     needs:
       - build
       - android
