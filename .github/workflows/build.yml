@@ -51,7 +51,7 @@ jobs:
         uses: actions/checkout@v3.3.0
 
       - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v1.0.4
+        uses: gradle/wrapper-validation-action@v1.0.6
 
       - name: Cache Dependencies
         uses: actions/cache@v3.3.1
