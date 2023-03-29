@@ -56,7 +56,7 @@ jobs:
           cache: gradle
 
       - name: Run Build
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v2.4.0
         
       - name: Configure Flutter
         uses: subosito/flutter-action@v2.10.0
@@ -76,7 +76,7 @@ jobs:
 
       - name: Publish Website
         if: github.repository == 'jaredsburrows/flutter-app-playground' && github.ref == 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v3.9.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
