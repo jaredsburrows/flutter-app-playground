@@ -17,9 +17,6 @@ flutter pub upgrade --null-safety
 **Build All**
 
 ```shell
-flutter upgrade
-flutter pub get
-flutter pub upgrade --null-safety
 flutter build apk --debug
 flutter build ios --debug --no-codesign
 flutter build web
