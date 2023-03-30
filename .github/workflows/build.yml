@@ -9,16 +9,12 @@ on:
 
 env:
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx4g -Xms128m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
+  JAVA_VERSION: 19
+
 jobs:
   build:
-    name: JDK ${{ matrix.java-version }}
+    name: Build
     runs-on: macos-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        java-version:
-          - 19
 
     steps:
       - name: Checkout Project
@@ -48,11 +44,11 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Configure JDK ${{ matrix.java-version }}
+      - name: Configure JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3.11.0
         with:
-          java-version: ${{ matrix.java-version }}
           distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
           cache: gradle
 
       - name: Run Build
