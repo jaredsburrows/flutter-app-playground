@@ -74,7 +74,7 @@ jobs:
 
       - name: Publish Website
         if: github.repository == 'jaredsburrows/flutter-app-playground' && github.ref == 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v3.9.2
+        uses: peaceiris/actions-gh-pages@v3.9.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
