@@ -44,7 +44,7 @@ dependencies:
   camera: ^0.10.3+2
   connectivity_plus: ^3.0.3
   device_info_plus: ^6.0.0
-  network_info_plus: ^3.0.2
+  network_info_plus: ^3.0.3
   sensors_plus: ^2.0.2
   # Utils
   share_plus: ^6.3.1
