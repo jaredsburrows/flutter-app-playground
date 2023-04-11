@@ -45,7 +45,7 @@ dependencies:
   connectivity_plus: ^3.0.3
   device_info_plus: ^6.0.0
   network_info_plus: ^3.0.2
-  sensors_plus: ^2.0.2
+  sensors_plus: ^2.0.3
   # Utils
   share_plus: ^6.3.1
   image_picker: ^0.8.7+1
