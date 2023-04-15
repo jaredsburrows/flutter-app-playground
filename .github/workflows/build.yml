@@ -60,7 +60,7 @@ jobs:
 
       - name: Run Build
         uses: gradle/gradle-build-action@v2.4.1
-        
+
       - name: Configure Flutter
         uses: subosito/flutter-action@v2.10.0
         with:
@@ -74,7 +74,7 @@ jobs:
         run: flutter build ios --debug --no-codesign
 
       - name: Build Website
-        run: flutter build web --base-href /flutter-app-firebase/
+        run: flutter build web --base-href /flutter-app-playground/
 
       - name: Publish Website
         if: github.repository == 'jaredsburrows/flutter-app-playground' && github.ref == 'refs/heads/main'
