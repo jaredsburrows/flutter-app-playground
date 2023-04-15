@@ -9,6 +9,8 @@
 **Flutter**
 
 ```shell
+rm pubspec.lock
+rm ios/Podfile.lock
 flutter upgrade
 flutter pub get
 flutter pub upgrade --null-safety
@@ -58,10 +60,16 @@ flutter build ios --release --obfuscate --split-debug-info build/ios/outputs/sym
 
 ## Build the Web app
 
-**Debug/Release**
+**Debug**
 
 ```shell
 flutter build web
+```
+
+**Release**
+
+```shell
+flutter build web --base-href /flutter-app-playground/
 ```
 
 ## Testing
