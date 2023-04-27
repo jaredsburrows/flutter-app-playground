@@ -40,7 +40,7 @@ dependencies:
   battery_plus: ^3.0.4
   mobile_scanner: ^3.2.0
   qr_flutter: ^4.0.0
-  package_info_plus: ^3.1.0
+  package_info_plus: ^3.1.1
   camera: ^0.10.4
   connectivity_plus: ^3.0.4
   device_info_plus: ^6.0.0
