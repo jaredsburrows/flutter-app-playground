@@ -37,7 +37,7 @@ dependencies:
   fl_chart: ^0.62.0
   video_player: ^2.6.1
   # Hardware
-  battery_plus: ^3.0.4
+  battery_plus: ^3.0.6
   mobile_scanner: ^3.2.0
   qr_flutter: ^4.0.0
   package_info_plus: ^3.1.0
