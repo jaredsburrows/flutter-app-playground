@@ -4,7 +4,7 @@
 [![build](https://github.com/jaredsburrows/flutter-app-playground/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/jaredsburrows/flutter-app-playground/actions/workflows/build.yml)
 [![Twitter Follow](https://img.shields.io/twitter/follow/jaredsburrows.svg?style=social)](https://twitter.com/jaredsburrows)
 
-### Updates
+## Setup
 
 **Flutter**
 

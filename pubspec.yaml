@@ -37,21 +37,21 @@ dependencies:
   fl_chart: ^0.62.0
   video_player: ^2.6.1
   # Hardware
-  battery_plus: ^3.0.4
+  battery_plus: ^3.0.6
   mobile_scanner: ^3.2.0
   qr_flutter: ^4.0.0
-  package_info_plus: ^3.1.0
-  camera: ^0.10.4
-  connectivity_plus: ^3.0.4
+  package_info_plus: ^3.1.2
+  camera: ^0.10.5
+  connectivity_plus: ^3.0.6
   device_info_plus: ^6.0.0
-  network_info_plus: ^3.0.3
-  sensors_plus: ^2.0.3
+  network_info_plus: ^3.0.5
+  sensors_plus: ^2.0.5
   # Utils
-  share_plus: ^6.3.2
-  image_picker: ^0.8.7+3
+  share_plus: ^6.3.4
+  image_picker: ^0.8.7+4
   # Libraries
   url_strategy: ^0.2.0
-  intl: ^0.18.0
+  intl: ^0.18.1
   screen_brightness: ^0.2.2
   geolocator: ^9.0.2
   chewie: ^1.4.0
