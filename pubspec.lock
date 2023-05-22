@@ -740,10 +740,10 @@ packages:
     dependency: "direct main"
     description:
       name: sensors_plus
-      sha256: "0c55946d7e828743c7ace61f35bdece9f2d1f00b18b4e669eeba664eb4597e82"
+      sha256: d2410503312ccf95ea037f21289a9db9173d2ad154f7ca2ccdacf75e8679eb17
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.3"
+    version: "3.0.1"
   sensors_plus_platform_interface:
     dependency: transitive
     description:
