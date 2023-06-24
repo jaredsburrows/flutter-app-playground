@@ -45,12 +45,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build
 
-      - name: Configure Flutter
-        uses: subosito/flutter-action@v2.10.0
-        with:
-          channel: stable
-          cache: true
-
       - name: Configure JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3.11.0
         with:
