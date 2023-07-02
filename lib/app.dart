@@ -11,9 +11,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Playground',
       theme: ThemeData(
         brightness: Brightness.light,
+        useMaterial3: true,
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
+        useMaterial3: true,
       ),
       home: const MainPage(),
     );

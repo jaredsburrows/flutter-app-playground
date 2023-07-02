@@ -45,13 +45,6 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.white,
-      statusBarIconBrightness: Brightness.dark,
-      systemNavigationBarColor: Colors.white,
-      systemNavigationBarIconBrightness: Brightness.dark,
-    ));
-
     final dateTime = DateFormat('yMMMMd', 'en_US').format(DateTime.now());
     final message = "Today is $dateTime";
 

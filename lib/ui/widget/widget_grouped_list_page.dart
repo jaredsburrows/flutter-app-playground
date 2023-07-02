@@ -39,9 +39,6 @@ class _WidgetGroupedListPageState extends State<WidgetGroupedListPage> {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Grouped List View Example'),
-        ),
         body: GroupedListView<dynamic, String>(
           elements: _elements,
           groupBy: (element) => element['group'],

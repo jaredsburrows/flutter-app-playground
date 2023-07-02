@@ -7,7 +7,6 @@ import 'package:flutter_app_playground/ui/connectivity/connectivity_plus_page.da
 import 'package:flutter_app_playground/ui/device/device_info_page.dart';
 import 'package:flutter_app_playground/ui/gps/gps_page.dart';
 import 'package:flutter_app_playground/ui/home/home_page.dart';
-import 'package:flutter_app_playground/ui/network/network_info_page.dart';
 import 'package:flutter_app_playground/ui/package/package_info_plus_page.dart';
 import 'package:flutter_app_playground/ui/page_info.dart';
 import 'package:flutter_app_playground/ui/profile/profile_page.dart';
@@ -16,7 +15,6 @@ import 'package:flutter_app_playground/ui/qr_camera/qr_camera_page2.dart';
 import 'package:flutter_app_playground/ui/qr_generator/qr_generator_page.dart';
 import 'package:flutter_app_playground/ui/sensors_page/sensors_page.dart';
 import 'package:flutter_app_playground/ui/share/share_page.dart';
-import 'package:flutter_app_playground/ui/sms/sms_page.dart';
 import 'package:flutter_app_playground/ui/video/video_page.dart';
 import 'package:flutter_app_playground/ui/video/video_page2.dart';
 import 'package:flutter_app_playground/ui/widget/widget_grouped_list_page.dart';
@@ -36,7 +34,6 @@ class MainPage extends StatefulWidget {
     ConnectivityPage(),
     DeviceInfoPage(),
     GpsPage(),
-    NetworkInfoPage(),
     PackageInfoPage(),
     ProfilePage(),
     QrCameraPage(),
@@ -44,7 +41,6 @@ class MainPage extends StatefulWidget {
     QrGeneratorPage(),
     SensorsPage(),
     SharePage(),
-    SmsPage(),
     VideoPage(),
     VideoPage2(),
     WidgetGroupedListPage(),
@@ -70,14 +66,14 @@ class _MainPageState extends State<MainPage>
 
     List<Widget> drawerOptions = [];
     // Drawer Header
-    drawerOptions.add(DrawerHeader(
+    drawerOptions.add(const DrawerHeader(
         margin: EdgeInsets.zero,
         padding: EdgeInsets.zero,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             image: DecorationImage(
                 fit: BoxFit.fitWidth,
                 image: AssetImage('res/images/Icon-512.png'))),
-        child: Stack(children: const <Widget>[
+        child: Stack(children: <Widget>[
           Positioned(
               bottom: 12.0,
               left: 16.0,

@@ -32,36 +32,6 @@ class _WidgetInfiniteListviewPageState
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Example'),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.arrow_downward),
-              onPressed: () {
-                _infiniteController.animateTo(
-                    _infiniteController.offset + 2000.0,
-                    duration: const Duration(milliseconds: 250),
-                    curve: Curves.easeIn);
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.arrow_upward),
-              onPressed: () {
-                _infiniteController.animateTo(
-                    _infiniteController.offset - 2000.0,
-                    duration: const Duration(milliseconds: 250),
-                    curve: Curves.easeIn);
-              },
-            ),
-          ],
-          bottom: const TabBar(
-            tabs: <Widget>[
-              Tab(text: 'First'),
-              Tab(text: 'Second'),
-              Tab(text: 'Third'),
-            ],
-          ),
-        ),
         body: TabBarView(
           children: <Widget>[
             _buildTab(0),
