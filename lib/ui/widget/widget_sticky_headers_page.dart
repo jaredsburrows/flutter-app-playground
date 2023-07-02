@@ -240,16 +240,6 @@ class ScaffoldWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     if (wrap) {
       return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(kToolbarHeight),
-          child: Hero(
-            tag: 'app_bar',
-            child: AppBar(
-              title: Text(title),
-              elevation: 0.0,
-            ),
-          ),
-        ),
         body: child,
       );
     } else {

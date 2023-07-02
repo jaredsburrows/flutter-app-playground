@@ -28,7 +28,6 @@ class _VideoPage2State extends State<VideoPage2> {
       child: Scaffold(
         key: const ValueKey<String>('home_page'),
         appBar: AppBar(
-          title: const Text('Video player example'),
           actions: <Widget>[
             IconButton(
               key: const ValueKey<String>('push_tab'),

@@ -91,7 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           const SizedBox(height: 16),
           Text(
-            "${user.about}\n${user.about}\n${user.about}",
+            user.about,
             style: const TextStyle(fontSize: 16, height: 1.4),
           ),
         ],
@@ -192,7 +192,8 @@ class ButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white, shape: const StadiumBorder(),
+        foregroundColor: Colors.white,
+        shape: const StadiumBorder(),
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
       ),
       onPressed: onClicked,
@@ -271,7 +272,7 @@ class UserPreferences {
     name: 'Jared Burrows',
     email: 'jaredsburrows@gmail.com',
     about:
-        'Certified Personal Trainer and Nutritionist with years of experience in creating effective diets and training plans focused on achieving individual customers goals in a smooth way.',
+        'Jared S. Burrows was a seasoned software engineer who worked at Google from March 2018. He contributed to Android Messages and Google Home for Android, specifically optimizing dependencies in testing and development. His involvement with Android development extended back to 2011, and his work included various applications available on the Google Play Store. Prior to Google, Burrows served as a mobile engineer at Microsoft, where he worked on Yammer for Android, and at Yahoo, where he contributed to the Flurry project.',
     isDarkMode: false,
   );
 }

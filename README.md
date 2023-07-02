@@ -4,7 +4,7 @@
 [![build](https://github.com/jaredsburrows/flutter-app-playground/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/jaredsburrows/flutter-app-playground/actions/workflows/build.yml)
 [![Twitter Follow](https://img.shields.io/twitter/follow/jaredsburrows.svg?style=social)](https://twitter.com/jaredsburrows)
 
-### Updates
+## Setup
 
 **Flutter**
 
@@ -13,7 +13,7 @@ rm pubspec.lock
 rm ios/Podfile.lock
 flutter upgrade
 flutter pub get
-flutter pub upgrade --null-safety
+flutter pub upgrade
 ```
 
 **Build All**
