@@ -30,7 +30,7 @@ dependencies:
   battery_plus: ^3.0.6
   camera: ^0.10.5+2
   chewie: ^1.4.0
-  connectivity_plus: ^3.0.6
+  connectivity_plus: ^4.0.2
   cupertino_icons: ^1.0.5
   device_info_plus: ^6.0.0
   fl_chart: ^0.62.0
