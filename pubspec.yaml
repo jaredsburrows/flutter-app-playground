@@ -51,7 +51,7 @@ dependencies:
   share_plus: ^6.3.4
   sticky_headers: ^0.3.0+2
   url_strategy: ^0.2.0
-  video_player: ^2.6.1
+  video_player: ^2.7.2
 
 dev_dependencies:
   flutter_lints: ^2.0.1
