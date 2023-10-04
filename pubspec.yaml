@@ -43,7 +43,7 @@ dependencies:
   image_picker: ^0.8.7+4
   infinite_listview: ^1.1.0
   intl: ^0.18.1
-  mobile_scanner: ^3.2.0
+  mobile_scanner: ^3.4.1
   package_info_plus: ^3.1.2
   qr_flutter: ^4.0.0
   screen_brightness: ^0.2.2
