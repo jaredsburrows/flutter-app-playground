@@ -13,7 +13,7 @@ import 'package:screen_brightness/screen_brightness.dart';
 // https://pub.dev/packages/qr_flutter/example
 // PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
 class QrGeneratorPage extends StatefulWidget implements PageInfo {
-  const QrGeneratorPage({Key? key}) : super(key: key);
+  const QrGeneratorPage({super.key});
 
   @override
   String title() => 'Qr Generator Page';
@@ -69,8 +69,8 @@ class _QrGeneratorPageState extends State<QrGeneratorPage> {
               color: Color(0xff1a5441),
             ),
             embeddedImage: snapshot.data,
-            embeddedImageStyle: QrEmbeddedImageStyle(
-              size: const Size.square(60),
+            embeddedImageStyle: const QrEmbeddedImageStyle(
+              size: Size.square(60),
             ),
           ),
         );

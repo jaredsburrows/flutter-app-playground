@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_playground/ui/page_info.dart';
 
 class ProfilePage extends StatefulWidget implements PageInfo {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   String title() => 'Profile Page';
@@ -106,11 +106,11 @@ class ProfileWidget extends StatelessWidget {
   final VoidCallback onClicked;
 
   const ProfileWidget({
-    Key? key,
+    super.key,
     required this.imagePath,
     this.isEdit = false,
     required this.onClicked,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -183,10 +183,10 @@ class ButtonWidget extends StatelessWidget {
   final VoidCallback onClicked;
 
   const ButtonWidget({
-    Key? key,
+    super.key,
     required this.text,
     required this.onClicked,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -219,7 +219,7 @@ class User {
 }
 
 class NumbersWidget extends StatelessWidget {
-  const NumbersWidget({Key? key}) : super(key: key);
+  const NumbersWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

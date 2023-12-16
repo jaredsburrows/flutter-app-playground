@@ -9,7 +9,7 @@ import 'package:flutter_app_playground/ui/page_info.dart';
 // https://pub.dev/packages/connectivity_plus
 // PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
 class ConnectivityPage extends StatefulWidget implements PageInfo {
-  const ConnectivityPage({Key? key}) : super(key: key);
+  const ConnectivityPage({super.key});
 
   @override
   String title() => 'Connectivity Page';

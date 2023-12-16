@@ -14,7 +14,7 @@ import 'package:video_player/video_player.dart';
 // https://pub.dev/packages/camera
 // PLATFORM ANDROID IOS WEB
 class CameraPage extends StatefulWidget implements PageInfo {
-  const CameraPage({Key? key}) : super(key: key);
+  const CameraPage({super.key});
 
   @override
   String title() => 'Camera Page';
@@ -1006,7 +1006,7 @@ class _CameraPageState extends State<CameraPage>
     }
 
     final VideoPlayerController vController = kIsWeb
-        ? VideoPlayerController.network(videoFile!.path)
+        ? VideoPlayerController.networkUrl(Uri.parse(videoFile!.path))
         : VideoPlayerController.file(File(videoFile!.path));
 
     videoPlayerListener = () {

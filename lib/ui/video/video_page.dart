@@ -6,7 +6,7 @@ import 'package:video_player/video_player.dart';
 // https://pub.dev/packages/chewie
 // PLATFORM ANDROID IOS WEB
 class VideoPage extends StatefulWidget implements PageInfo {
-  const VideoPage({Key? key}) : super(key: key);
+  const VideoPage({super.key});
 
   @override
   String title() => 'Video Page';
@@ -47,9 +47,9 @@ class _VideoPageState extends State<VideoPage> {
 
   Future<void> initializePlayer() async {
     _videoPlayerController1 =
-        VideoPlayerController.network(srcs[currPlayIndex]);
+        VideoPlayerController.networkUrl(Uri.parse(srcs[currPlayIndex]));
     _videoPlayerController2 =
-        VideoPlayerController.network(srcs[currPlayIndex]);
+        VideoPlayerController.networkUrl(Uri.parse(srcs[currPlayIndex]));
     await Future.wait([
       _videoPlayerController1.initialize(),
       _videoPlayerController2.initialize()
@@ -172,9 +172,9 @@ class _VideoPageState extends State<VideoPage> {
                   ? Chewie(
                       controller: _chewieController!,
                     )
-                  : Column(
+                  : const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         CircularProgressIndicator(),
                         SizedBox(height: 20),
                         Text('Loading'),

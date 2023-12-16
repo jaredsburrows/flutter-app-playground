@@ -5,7 +5,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 // https://pub.dev/packages/package_info_plus
 // PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
 class PackageInfoPage extends StatefulWidget implements PageInfo {
-  const PackageInfoPage({Key? key}) : super(key: key);
+  const PackageInfoPage({super.key});
 
   @override
   String title() => 'Package Info Page';

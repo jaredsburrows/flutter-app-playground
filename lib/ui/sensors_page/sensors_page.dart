@@ -7,7 +7,7 @@ import 'package:sensors_plus/sensors_plus.dart';
 // https://pub.dev/packages/sensors_plus
 // PLATFORM ANDROID IOS WEB
 class SensorsPage extends StatefulWidget implements PageInfo {
-  const SensorsPage({Key? key}) : super(key: key);
+  const SensorsPage({super.key});
 
   @override
   String title() => 'Sensors Page';
@@ -119,7 +119,7 @@ class _SensorsPageState extends State<SensorsPage> {
   void initState() {
     super.initState();
     _streamSubscriptions.add(
-      accelerometerEvents.listen(
+      accelerometerEventStream().listen(
         (AccelerometerEvent event) {
           setState(() {
             _accelerometerValues = <double>[event.x, event.y, event.z];
@@ -128,7 +128,7 @@ class _SensorsPageState extends State<SensorsPage> {
       ),
     );
     _streamSubscriptions.add(
-      gyroscopeEvents.listen(
+      gyroscopeEventStream().listen(
         (GyroscopeEvent event) {
           setState(() {
             _gyroscopeValues = <double>[event.x, event.y, event.z];
@@ -137,7 +137,7 @@ class _SensorsPageState extends State<SensorsPage> {
       ),
     );
     _streamSubscriptions.add(
-      userAccelerometerEvents.listen(
+      userAccelerometerEventStream().listen(
         (UserAccelerometerEvent event) {
           setState(() {
             _userAccelerometerValues = <double>[event.x, event.y, event.z];
@@ -146,7 +146,7 @@ class _SensorsPageState extends State<SensorsPage> {
       ),
     );
     _streamSubscriptions.add(
-      magnetometerEvents.listen(
+      magnetometerEventStream().listen(
         (MagnetometerEvent event) {
           setState(() {
             _magnetometerValues = <double>[event.x, event.y, event.z];

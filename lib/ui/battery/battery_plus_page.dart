@@ -8,7 +8,7 @@ import 'package:flutter_app_playground/ui/widget/drawer.dart';
 // https://pub.dev/packages/battery_plus
 // ANDROID IOS LINUX MACOS WEB WINDOWS
 class BatteryPage extends StatefulWidget implements PageInfo {
-  const BatteryPage({Key? key}) : super(key: key);
+  const BatteryPage({super.key});
 
   @override
   String title() => 'Battery Page';
@@ -54,32 +54,11 @@ class _BatteryPageState extends State<BatteryPage> {
           ElevatedButton(
             onPressed: () async {
               final batteryLevel = await _battery.batteryLevel;
-              // ignore: unawaited_futures
-              showDialog<void>(
-                context: context,
-                builder: (_) => AlertDialog(
-                  content: Text('Battery: $batteryLevel%'),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('OK'),
-                    )
-                  ],
-                ),
-              );
-            },
-            child: const Text('Get battery level'),
-          ),
-          ElevatedButton(
-              onPressed: () async {
-                final isInPowerSaveMode = await _battery.isInBatterySaveMode;
-                // ignore: unawaited_futures
+              if (mounted) {
                 showDialog<void>(
                   context: context,
                   builder: (_) => AlertDialog(
-                    content: Text('Is on low power mode: $isInPowerSaveMode'),
+                    content: Text('Battery: $batteryLevel%'),
                     actions: <Widget>[
                       TextButton(
                         onPressed: () {
@@ -90,6 +69,29 @@ class _BatteryPageState extends State<BatteryPage> {
                     ],
                   ),
                 );
+              }
+            },
+            child: const Text('Get battery level'),
+          ),
+          ElevatedButton(
+              onPressed: () async {
+                final isInPowerSaveMode = await _battery.isInBatterySaveMode;
+                if (mounted) {
+                  showDialog<void>(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                      content: Text('Is on low power mode: $isInPowerSaveMode'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('OK'),
+                        )
+                      ],
+                    ),
+                  );
+                }
               },
               child: const Text('Is on low power mode'))
         ],

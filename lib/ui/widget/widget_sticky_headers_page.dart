@@ -5,7 +5,7 @@ import 'package:sticky_headers/sticky_headers.dart';
 // https://pub.dev/packages/sticky_headers
 // PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
 class WidgetStickyHeadersPage extends StatefulWidget implements PageInfo {
-  const WidgetStickyHeadersPage({Key? key}) : super(key: key);
+  const WidgetStickyHeadersPage({super.key});
 
   @override
   String title() => 'Widget - Sticky Headers Page';
@@ -59,9 +59,9 @@ class _WidgetStickyHeadersPageState extends State<WidgetStickyHeadersPage> {
 
 class Example1 extends StatelessWidget {
   const Example1({
-    Key? key,
+    super.key,
     this.controller,
-  }) : super(key: key);
+  });
 
   final ScrollController? controller;
 
@@ -104,9 +104,9 @@ class Example1 extends StatelessWidget {
 
 class Example2 extends StatelessWidget {
   const Example2({
-    Key? key,
+    super.key,
     this.controller,
-  }) : super(key: key);
+  });
 
   final ScrollController? controller;
 
@@ -172,9 +172,9 @@ class Example2 extends StatelessWidget {
 
 class Example3 extends StatelessWidget {
   const Example3({
-    Key? key,
+    super.key,
     this.controller,
-  }) : super(key: key);
+  });
 
   final ScrollController? controller;
 
@@ -226,11 +226,11 @@ class Example3 extends StatelessWidget {
 
 class ScaffoldWrapper extends StatelessWidget {
   const ScaffoldWrapper({
-    Key? key,
+    super.key,
     required this.title,
     required this.child,
     this.wrap = true,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final String title;
@@ -251,7 +251,7 @@ class ScaffoldWrapper extends StatelessWidget {
 }
 
 class Example4 extends StatefulWidget {
-  const Example4({Key? key}) : super(key: key);
+  const Example4({super.key});
 
   @override
   State<Example4> createState() => _Example4State();

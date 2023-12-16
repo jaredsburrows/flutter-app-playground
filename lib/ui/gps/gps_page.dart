@@ -6,7 +6,7 @@ import 'package:flutter_app_playground/ui/page_info.dart';
 import 'package:geolocator/geolocator.dart';
 
 class GpsPage extends StatefulWidget implements PageInfo {
-  const GpsPage({Key? key}) : super(key: key);
+  const GpsPage({super.key});
 
   @override
   String title() => 'Gps Page';

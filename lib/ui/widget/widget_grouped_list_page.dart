@@ -5,7 +5,7 @@ import 'package:grouped_list/grouped_list.dart';
 // https://pub.dev/packages/grouped_list
 // PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
 class WidgetGroupedListPage extends StatefulWidget implements PageInfo {
-  const WidgetGroupedListPage({Key? key}) : super(key: key);
+  const WidgetGroupedListPage({super.key});
 
   @override
   String title() => 'Widget - Grouped List Page';

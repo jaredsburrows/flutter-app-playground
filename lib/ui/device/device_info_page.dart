@@ -10,7 +10,7 @@ import 'package:flutter_app_playground/ui/page_info.dart';
 // https://pub.dev/packages/device_info_plus
 // PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
 class DeviceInfoPage extends StatefulWidget implements PageInfo {
-  const DeviceInfoPage({Key? key}) : super(key: key);
+  const DeviceInfoPage({super.key});
 
   @override
   String title() => 'Device Info Page';
@@ -135,7 +135,7 @@ class _DeviceInfoPageState extends State<DeviceInfoPage> {
 
   Map<String, dynamic> _readWebBrowserInfo(WebBrowserInfo data) {
     return <String, dynamic>{
-      'browserName': describeEnum(data.browserName),
+      'browserName': data.browserName.name,
       'appCodeName': data.appCodeName,
       'appName': data.appName,
       'appVersion': data.appVersion,

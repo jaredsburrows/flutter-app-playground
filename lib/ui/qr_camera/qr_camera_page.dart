@@ -6,7 +6,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 // https://pub.dev/packages/mobile_scanner
 // PLATFORM ANDROID IOS MACOS
 class QrCameraPage extends StatefulWidget implements PageInfo {
-  const QrCameraPage({Key? key}) : super(key: key);
+  const QrCameraPage({super.key});
 
   @override
   String title() => 'Qr Camera Page';
@@ -136,17 +136,21 @@ class _QrCameraPageState extends State<QrCameraPage>
                             await picker.pickImage(source: ImageSource.gallery);
                         if (image != null) {
                           if (await controller.analyzeImage(image.path)) {
-                            ScaffoldMessenger.of(this.context)
-                                .showSnackBar(const SnackBar(
-                              content: Text('Barcode found!'),
-                              backgroundColor: Colors.green,
-                            ));
+                            if (mounted) {
+                              ScaffoldMessenger.of(this.context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text('Barcode found!'),
+                                backgroundColor: Colors.green,
+                              ));
+                            }
                           } else {
-                            ScaffoldMessenger.of(this.context)
-                                .showSnackBar(const SnackBar(
-                              content: Text('No barcode found!'),
-                              backgroundColor: Colors.red,
-                            ));
+                            if (mounted) {
+                              ScaffoldMessenger.of(this.context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text('No barcode found!'),
+                                backgroundColor: Colors.red,
+                              ));
+                            }
                           }
                         }
                       },

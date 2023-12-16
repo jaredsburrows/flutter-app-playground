@@ -5,7 +5,7 @@ int selectedIndex = 0;
 int index = 0;
 
 class AppDrawer extends StatefulWidget {
-  const AppDrawer({Key? key}) : super(key: key);
+  const AppDrawer({super.key});
 
   @override
   State<AppDrawer> createState() => _AppDrawerState();
@@ -49,14 +49,14 @@ class _AppDrawerState extends State<AppDrawer> {
   }
 
   Widget _createHeader() {
-    return DrawerHeader(
+    return const DrawerHeader(
         margin: EdgeInsets.zero,
         padding: EdgeInsets.zero,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             image: DecorationImage(
                 fit: BoxFit.fitWidth,
                 image: AssetImage('res/images/Icon-512.png'))),
-        child: Stack(children: const <Widget>[
+        child: Stack(children: <Widget>[
           Positioned(
               bottom: 12.0,
               left: 16.0,
@@ -69,12 +69,12 @@ class _AppDrawerState extends State<AppDrawer> {
 
 class PageListTile extends StatelessWidget {
   const PageListTile({
-    Key? key,
+    super.key,
     required this.icon,
     required this.pageName,
     required this.isSelected,
     this.onTap,
-  }) : super(key: key);
+  });
   final IconData icon;
   final String pageName;
   final bool isSelected;

@@ -5,7 +5,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 // https://pub.dev/packages/mobile_scanner
 // PLATFORM ANDROID IOS MACOS
 class QrCameraPage2 extends StatefulWidget implements PageInfo {
-  const QrCameraPage2({Key? key}) : super(key: key);
+  const QrCameraPage2({super.key});
 
   @override
   String title() => 'Qr Camera Page 2';

@@ -5,7 +5,7 @@ import 'package:video_player/video_player.dart';
 // https://pub.dev/packages/video_player
 // PLATFORM ANDROID IOS WEB
 class VideoPage2 extends StatefulWidget implements PageInfo {
-  const VideoPage2({Key? key}) : super(key: key);
+  const VideoPage2({super.key});
 
   @override
   String title() => 'Video Page 2';
@@ -108,7 +108,7 @@ class _ButterFlyAssetVideoInList extends StatelessWidget {
 
 /// A filler card to show the video in a list of scrolling contents.
 class _ExampleCard extends StatelessWidget {
-  const _ExampleCard({Key? key, required this.title}) : super(key: key);
+  const _ExampleCard({required this.title});
 
   final String title;
 
@@ -218,8 +218,9 @@ class _BumbleBeeRemoteVideoState extends State<_BumbleBeeRemoteVideo> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(
-      'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+    _controller = VideoPlayerController.networkUrl(
+      Uri.parse(
+          'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'),
       closedCaptionFile: _loadCaptions(),
       videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
     );
@@ -266,8 +267,7 @@ class _BumbleBeeRemoteVideoState extends State<_BumbleBeeRemoteVideo> {
 }
 
 class _ControlsOverlay extends StatelessWidget {
-  const _ControlsOverlay({Key? key, required this.controller})
-      : super(key: key);
+  const _ControlsOverlay({required this.controller});
 
   static const List<Duration> _exampleCaptionOffsets = <Duration>[
     Duration(seconds: -10),

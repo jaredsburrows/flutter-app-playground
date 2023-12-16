@@ -5,7 +5,7 @@ import 'package:infinite_listview/infinite_listview.dart';
 // https://pub.dev/packages/infinite_listview
 // PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
 class WidgetInfiniteListviewPage extends StatefulWidget implements PageInfo {
-  const WidgetInfiniteListviewPage({Key? key}) : super(key: key);
+  const WidgetInfiniteListviewPage({super.key});
 
   @override
   String title() => 'Widget - Infinite Listview Page';

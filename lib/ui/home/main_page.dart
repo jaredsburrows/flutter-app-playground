@@ -22,7 +22,7 @@ import 'package:flutter_app_playground/ui/widget/widget_infinite_listview_page.d
 import 'package:flutter_app_playground/ui/widget/widget_sticky_headers_page.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   // TODO handle saving state individually
   final List<PageInfo> drawerItems = const [
@@ -107,25 +107,21 @@ class _MainPageState extends State<MainPage>
       child: Text('About'),
     ));
 
-    return WillPopScope(
-      // Handle back button
-      onWillPop: () async {
+    return PopScope(
+      canPop: true,
+      onPopInvoked: (didPop) async {
         if (_navigatorKey.currentState?.isDrawerOpen == true) {
           // If the drawer is open, close it
           Navigator.pop(context);
-          return false;
+          // Handled the pop intent
         } else if (widget.drawerItems[_selectedDrawerIndex] is! HomePage) {
           // Go back to the Home page if not there
           setState(() {
             _selectedDrawerIndex = 0;
           });
-          return false;
-        } else if (widget.drawerItems[_selectedDrawerIndex] is HomePage) {
-          // If on the Home page, close the app
-          return true;
+          // Handled the pop intent
         }
-        // Default - exits app
-        return true;
+        // If on the Home page or any other case, allow system default behavior
       },
       child: Scaffold(
           key: _navigatorKey,

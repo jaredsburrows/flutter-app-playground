@@ -9,7 +9,7 @@ import 'package:flutter_app_playground/ui/widget/drawer.dart';
 // https://pub.dev/packages/fl_chart
 // PLATFORM ANDROID IOS LINUX MACOS WEB WINDOWS
 class ChartPage extends StatefulWidget implements PageInfo {
-  const ChartPage({Key? key}) : super(key: key);
+  const ChartPage({super.key});
 
   @override
   String title() => 'Chart Page';

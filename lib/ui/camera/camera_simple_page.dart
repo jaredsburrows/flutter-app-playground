@@ -6,7 +6,7 @@ import 'package:flutter_app_playground/ui/page_info.dart';
 // https://pub.dev/packages/camera
 // PLATFORM ANDROID IOS WEB
 class CameraSimplePage extends StatefulWidget implements PageInfo {
-  const CameraSimplePage({Key? key}) : super(key: key);
+  const CameraSimplePage({super.key});
 
   @override
   String title() => 'Camera Simple Page';

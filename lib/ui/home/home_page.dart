@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_playground/ui/page_info.dart';
 
 class HomePage extends StatefulWidget implements PageInfo {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   String title() => 'Home Page';
@@ -17,7 +17,6 @@ class HomePage extends StatefulWidget implements PageInfo {
   State<HomePage> createState() => _HomePageState();
 }
 
-// TODO: better way to save state
 int _counter = 0;
 
 class _HomePageState extends State<HomePage> {
