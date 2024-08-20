@@ -25,14 +25,14 @@ class ConnectivityPage extends StatefulWidget implements PageInfo {
 }
 
 class _ConnectivityPageState extends State<ConnectivityPage> {
+  List<ConnectivityResult> _connectionStatus = [ConnectivityResult.none];
   final Connectivity _connectivity = Connectivity();
-  ConnectivityResult _connectionStatus = ConnectivityResult.none;
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
 
   @override
   void initState() {
     super.initState();
-    _initConnectivity();
+    initConnectivity();
 
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
@@ -45,8 +45,8 @@ class _ConnectivityPageState extends State<ConnectivityPage> {
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> _initConnectivity() async {
-    late ConnectivityResult result;
+  Future<void> initConnectivity() async {
+    late List<ConnectivityResult> result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       result = await _connectivity.checkConnectivity();
@@ -65,17 +65,44 @@ class _ConnectivityPageState extends State<ConnectivityPage> {
     return _updateConnectionStatus(result);
   }
 
-  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+  Future<void> _updateConnectionStatus(List<ConnectivityResult> result) async {
     setState(() {
       _connectionStatus = result;
     });
+    // ignore: avoid_print
+    print('Connectivity changed: $_connectionStatus');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: Text('Connection Status: ${_connectionStatus.toString()}')),
+      appBar: AppBar(
+        title: const Text('Connectivity Plus Example'),
+        elevation: 4,
+      ),
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Spacer(flex: 2),
+          Text(
+            'Active connection types:',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          const Spacer(),
+          ListView(
+            shrinkWrap: true,
+            children: List.generate(
+                _connectionStatus.length,
+                    (index) => Center(
+                  child: Text(
+                    _connectionStatus[index].toString(),
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                )),
+          ),
+          const Spacer(flex: 2),
+        ],
+      ),
     );
   }
 }
