@@ -37,11 +37,9 @@ class _LineChart extends StatelessWidget {
         minY: 0,
       );
 
-  LineTouchData get lineTouchData1 => LineTouchData(
+  LineTouchData get lineTouchData1 => const LineTouchData(
         handleBuiltInTouches: true,
-        touchTooltipData: LineTouchTooltipData(
-          tooltipBgColor: Colors.blueGrey.withOpacity(0.8),
-        ),
+        touchTooltipData: LineTouchTooltipData(),
       );
 
   FlTitlesData get titlesData1 => FlTitlesData(

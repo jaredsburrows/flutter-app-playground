@@ -225,7 +225,7 @@ class _SharePageState extends State<SharePage> {
           subject: subject,
           sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
     } else {
-      shareResult = await Share.shareWithResult(text,
+      shareResult = await Share.share(text,
           subject: subject,
           sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size);
     }
